@@ -48,20 +48,65 @@ MongoClient.connect(url, function(err, database) {
 //
 // });
 //
-// app.get('/save',function (req,res) {
-//
-//     db.collection('invent').find({}).toArray(function (err,result) {
-//         if (err) throw err
-//
-//         res.send(result);
-//
-//     })
-//
-// });
+app.get('/AllEvents',function (req,res) {
+
+    let arr=[];
+
+    db.collection('AllEvents').find({}).toArray(function (err,result) {
+        if (err) throw err;
+
+        //sqldb.login.findAll()
+
+        for(i of result){
+
+            sqldb.login.findAll({where:{id:i.Sql}}).then(function (result) {
+
+                arr.push(new objc(result[0].username,result[0].phone));
+                console.log(arr);
+
+            })
+
+        }
+
+        // console.log(result[0].Sql);
+        //
+         let done=false;
+         let idInterval= setInterval(function () {
+
+           if (done){
+               clearInterval(idInterval);
+           }
+
+            else if (arr.length==result.length){
+
+                res.send({result,arr});
+                done=true;
+            }
+            else{
+
+                clearInterval(idInterval);
+
+            }
+
+        },1000);
+
+    })
+
+});
+
+
+
+function objc(username,phone){
+
+    this.username=username;
+    this.phone=phone;
+
+}
+
 
 app.post('/delete',function (req,res) {
 
-    db.collection('AllEvents').deleteOne({id:1},function (err,result) {
+    db.collection('AllEvents').deleteMany({},function (err,result) {
 
         res.send("Deleted");
 
@@ -86,23 +131,23 @@ app.get('/mongotrial',(req,res)=>{
 
     db.collection('AllEvents').insertMany([
         // MongoDB adds the _id field with an ObjectId if _id is not present
-        { id: 1, imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "Dance",
+        { Sql: "1", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "Dance",
             date:"22-12-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
             , going:0 , interested:0 , like:0 , notlike:0 },
 
-        { id: 2, imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "Dj babu",
+        { Sql:"2", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "Dj babu",
             date:"21-11-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
             , going:0 , interested:0 , like:0 , notlike:0 },
 
-        { id: 1, imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "SingSong",
+        { Sql:"1", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "SingSong",
             date:"12-10-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
             , going:0 , interested:0 , like:0 , notlike:0 },
 
-        { id: 3, imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "kels",
+        { Sql:"3", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "kels",
             date:"25-09-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
             , going:0 , interested:0 , like:0 , notlike:0 },
 
-        { id: 1, imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "guitar",
+        { Sql:"1", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "guitar",
             date:"28-09-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
             , going:0 , interested:0 , like:0 , notlike:0 }
 
