@@ -13,7 +13,13 @@ $(function () {
         $.post('/login',{email:email.val(),password:password.val()},function (data) {
 
             if (data.success){
-                alert("Success")
+                // alert("Success")
+                console.log(data.id)
+                console.log(data.email)
+                sessionStorage.setItem("EventLogin",JSON.stringify(new objc(data.id,data.email)));
+                localStorage.setItem("EventLogin",JSON.stringify(new objc(data.id,data.email)));
+                window.open("Profile.html","_self");
+
             }
 
             else{
@@ -26,3 +32,11 @@ $(function () {
 
 
 });
+
+
+function objc(id,email) {
+
+    this.id=id;
+    this.email=email
+
+}

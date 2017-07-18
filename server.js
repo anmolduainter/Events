@@ -48,6 +48,22 @@ MongoClient.connect(url, function(err, database) {
 //
 // });
 //
+
+
+app.post('/YourEvents',function (req,res) {
+
+    db.collection('AllEvents').find({Sql:req.body.id}).toArray(function (err,result) {
+
+        if (err) throw err;
+
+        res.send(result)
+
+    })
+
+});
+
+
+
 app.get('/AllEvents',function (req,res) {
 
     let arr=[];
@@ -206,7 +222,9 @@ app.post('/login',(req,res)=>{
             res.send({success:false})
         }
         else {
-            res.send({success:true});
+            console.log(result[0].id);
+            console.log(result[0].email)
+            res.send({success:true,id:result[0].id,email:result[0].email});
         }
     });
 
