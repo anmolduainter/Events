@@ -8,8 +8,37 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/index.js"></script>
 </head>
 <body>
+
+<nav style="background: transparent" class="navbar navbar-toggleable-md navbar-inverse bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a style="font-size: 30px" class="navbar-brand" href="#">Events</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="viewEvent.html">All Events<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Todays Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Past Events</a>
+            </li>
+        </ul>
+        <!--<form class="form-inline my-2 my-lg-0">-->
+            <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+            <button id="login" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Login</button>
+        <!--</form>-->
+    </div>
+</nav>
+
+
 
 <div class="container">
     <video autoplay loop id="video-background" muted plays-inline>
@@ -27,10 +56,9 @@
     <br>
     <div class="row" id="Top-part">
         <div class="col text-center">
-            <div class="btn btn-primary" id="putEventBtn">Put Event</div>
-        </div>
-        <div class="col text-center">
-            <button class="btn btn-primary" id="viewEventBtn"> View Event</button>
+            <h2 style="color: #eeeeee">Hurry Up It's Free</h2>
+            <br>
+            <div class="btn btn-primary" id="putEventBtn">Register Your Events</div>
         </div>
     </div>
     <br>
