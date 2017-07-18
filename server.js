@@ -166,7 +166,7 @@ app.get('/mongotrial',(req,res)=>{
 
 
 
-app.post('/save',(req,res)=>{
+app.post('/register',(req,res)=>{
 
     sqldb.login.create({username : req.body.username,
                         password : req.body.password,
@@ -174,12 +174,28 @@ app.post('/save',(req,res)=>{
                         phone: req.body.phone
                     }).then(function (data) {
 
-                        res.send(data);
+                       res.send(data);
+
         }).catch(function (err) {
 
           throw err;
 
        })
+});
+
+app.post('/registerCheck',(req,res)=>{
+
+   sqldb.login.findAll({where:{username:req.body.username}}).then(function(result){
+
+       if (typeof(result[0])=='undefined'){
+           res.send({success:false})
+       }
+       else {
+           res.send({success:true});
+       }
+
+   })
+
 });
 
 app.post('/login',(req,res)=>{

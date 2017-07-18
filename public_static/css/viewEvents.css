@@ -1,0 +1,19 @@
+
+body{
+    background: #0d151f ;
+    color:whitesmoke;
+}
+
+.jumbotron{
+
+    background: transparent;
+
+}
+
+.jumbotron > h1{
+
+    font-weight: bold;
+    color:mintcream;
+    font-size: 100px;
+
+}

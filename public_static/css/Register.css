@@ -1,0 +1,18 @@
+
+body{
+
+    background: aliceblue;
+
+}
+
+.jumbotron{
+    background: transparent;
+}
+
+.jumbotron >h1{
+
+    font-size: 70px;
+    font-weight:bold;
+
+}
+
