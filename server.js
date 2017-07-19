@@ -110,13 +110,48 @@ app.get('/AllEvents',function (req,res) {
 
 });
 
+
+
 app.get('/TodayEvents',function (req,res) {
 
     let date1=new Date();
-   let date=new Date().toISOString();
-   let dateQ=date.substr(0,10);
 
-   console.log(date1.getHours());
+    let dd = date1.getDate();
+    let mm = date1.getMonth()+1;
+    let yyyy = date1.getFullYear();
+
+    if(dd<10) {
+        dd = '0'+dd
+    }
+
+    if(mm<10) {
+        mm = '0'+mm
+    }
+
+    dateQ =yyyy + '-' + mm + '-' + dd;
+
+   console.log(dateQ);
+
+   let time;
+   let timeHr=date1.getHours();
+   let timeMin=date1.getMinutes();
+   if (timeHr > 12){
+       time=((+timeHr) - 12)+":"+timeMin + " PM"
+   }
+   else if (timeHr<12 && timeHr!=0){
+       time= timeHr+":"+timeMin +  " AM"
+   }
+
+   else if (timeHr==0){
+       time="12"+":"+timeMin+" AM"
+   }
+   else if (timeHr ==12){
+       time="12"+":"+timeMin+" PM"
+   }
+
+   console.log(time)
+
+
 
     let arr=[];
 
@@ -126,6 +161,15 @@ app.get('/TodayEvents',function (req,res) {
         //sqldb.login.findAll()
 
         for(i of result){
+
+            console.log(i.time);
+
+            let arrTime=i.time.split("-");
+            console.log(arrTime);
+
+            if (time<arrTime){
+                console.log("less");
+            }
 
             sqldb.login.findAll({where:{id:i.Sql}}).then(function (result) {
 

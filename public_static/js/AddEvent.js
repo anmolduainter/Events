@@ -5,7 +5,8 @@
 let imageUrl;
 let title;
 let date;
-let time;
+let Starttime;
+let endTime;
 let desc;
 let submit;
 
@@ -15,18 +16,27 @@ $(function () {
 
 
 
-    $('#timepicker1').timepicker();
+    console.log($('#timepicker1').timepicker().val());
+
+    console.log($('#timepicker2').timepicker().val());
 
 
     imageUrl=$('#imageUrl');
     title=$('#Title');
     date=$('#Date');
-    time=$('#Time');
+    Starttime=$('#timepicker1').timepicker();
+    endTime=$('#timepicker2').timepicker();
     desc=$('#desc');
     submit=$('#Submit');
 
 
     submit.click(function () {
+
+        console.log($('#timepicker1').timepicker().val());
+
+
+     let time=`${Starttime.val()} - ${endTime.val()}`;
+
 
        $.post('/AddEvent',{
 
@@ -34,7 +44,7 @@ $(function () {
            imageUrl:imageUrl.val(),
            title:title.val(),
            date:date.val(),
-           time:time.val(),
+           time:time,
            desc:desc.val(),
 
        },function (res) {
