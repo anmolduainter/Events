@@ -38,6 +38,9 @@ function getAllEvents(){
             <br>
             <br>
             <p class="pull-right">For more details : -${res.arr[i].phone} (${res.arr[i].username})</p>
+            <br>
+           <button class="btn btn-secondary">Interested</button>
+           <button class="btn btn-secondary">Going</button>
         </div>
 
     </div>

@@ -35,7 +35,14 @@ $(function () {
 
                       },function (data) {
 
-                        console.log(data);
+                        if (data.success) {
+                            sessionStorage.setItem("EventLogin", JSON.stringify(new objc(data.id, data.email)));
+                            localStorage.setItem("EventLogin", JSON.stringify(new objc(data.id, data.email)));
+                            window.open("Profile.html", "_self");
+                        }
+                        else{
+                            alert("Some problem occured")
+                        }
 
                     })
 
@@ -56,3 +63,11 @@ $(function () {
 
 
 });
+
+
+function objc(id,email) {
+
+    this.id=id;
+    this.email=email
+
+}

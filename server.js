@@ -68,7 +68,7 @@ app.get('/AllEvents',function (req,res) {
 
     let arr=[];
 
-    db.collection('AllEvents').find({}).toArray(function (err,result) {
+    db.collection('AllEvents').find({}).sort({date:1}).toArray(function (err,result) {
         if (err) throw err;
 
         //sqldb.login.findAll()
@@ -110,7 +110,57 @@ app.get('/AllEvents',function (req,res) {
 
 });
 
+app.get('/TodayEvents',function (req,res) {
 
+    let date1=new Date();
+   let date=new Date().toISOString();
+   let dateQ=date.substr(0,10);
+
+   console.log(date1.getHours());
+
+    let arr=[];
+
+    db.collection('AllEvents').find({date:dateQ}).toArray(function (err,result) {
+        if (err) throw err;
+
+        //sqldb.login.findAll()
+
+        for(i of result){
+
+            sqldb.login.findAll({where:{id:i.Sql}}).then(function (result) {
+
+                arr.push(new objc(result[0].username,result[0].phone));
+                console.log(arr);
+
+            })
+
+        }
+
+        // console.log(result[0].Sql);
+        //
+        let done=false;
+        let idInterval= setInterval(function () {
+
+            if (done){
+                clearInterval(idInterval);
+            }
+
+            else if (arr.length==result.length){
+
+                res.send({result,arr});
+                done=true;
+            }
+            else{
+
+                clearInterval(idInterval);
+
+            }
+
+        },1000);
+
+    })
+
+});
 
 function objc(username,phone){
 
@@ -219,7 +269,7 @@ app.post('/register',(req,res)=>{
                         phone: req.body.phone
                     }).then(function (data) {
 
-                       res.send(data);
+                       res.send({success:true,id:data.id,email:data.email});
 
         }).catch(function (err) {
 

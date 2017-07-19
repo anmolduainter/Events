@@ -13,6 +13,11 @@ $(function () {
 
     let Sqldid=JSON.parse(localStorage.getItem('EventLogin')).id;
 
+
+
+    $('#timepicker1').timepicker();
+
+
     imageUrl=$('#imageUrl');
     title=$('#Title');
     date=$('#Date');
