@@ -142,38 +142,34 @@ app.post('/delete',function (req,res) {
 // }
 
 
-app.get('/mongotrial',(req,res)=>{
+app.post('/AddEvent',(req,res)=>{
+
+    let id=(req.body.id.toString());
+    let title=(req.body.title);
+    let imgURL=req.body.imageUrl;
+        let date=req.body.date.toString()
+    let time=req.body.time;
+        let desc=req.body.desc;
+
+        console.log(id)
+        console.log(title)
+      console.log(imgURL)
+    console.log(date)
+    console.log(time)
+    console.log(desc)
 
 
-    db.collection('AllEvents').insertMany([
-        // MongoDB adds the _id field with an ObjectId if _id is not present
-        { Sql: "1", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "Dance",
-            date:"22-12-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
-            , going:0 , interested:0 , like:0 , notlike:0 },
+    db.collection('AllEvents').insertOne(
 
-        { Sql:"2", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "Dj babu",
-            date:"21-11-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
-            , going:0 , interested:0 , like:0 , notlike:0 },
-
-        { Sql:"1", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "SingSong",
-            date:"12-10-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
-            , going:0 , interested:0 , like:0 , notlike:0 },
-
-        { Sql:"3", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "kels",
-            date:"25-09-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
-            , going:0 , interested:0 , like:0 , notlike:0 },
-
-        { Sql:"1", imgUrl:"https://www.w3schools.com/css/trolltunga.jpg", name: "guitar",
-            date:"28-09-2017",time:"10AM - 11PM",desc:"Hello, with that spelling, was used in publications in the US as early as the 18 October 1826 edition of the Norwich Courier of Norwich, Connecticut.[1] Another early use was an 1833 American book called The Sketches and Eccentricities of Col. David Crockett, of West Tennessee,[2] which was reprinted that same year in The London Literary Gazette."
-            , going:0 , interested:0 , like:0 , notlike:0 }
+        { Sql:id, imgUrl:imgURL, name: title,
+            date:date,time:time,desc:desc , going:0 , interested:0 , like:0 , notlike:0 }
 
 
-
-    ])
+    )
 
         .then(function(result) {
             console.log(result);
-            res.send(result);
+            res.send({success:true});
         })
 
 

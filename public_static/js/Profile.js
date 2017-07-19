@@ -5,13 +5,28 @@
 let container;
 let Sqlid;
 let email;
+let add;
 $(function(){
 
     Sqlid=JSON.parse(localStorage.getItem('EventLogin')).id;
     container=$('.container');
+    add=$('#Add');
     getData();
 
+    add.click(addClick)
+
 });
+
+
+function addClick(ev) {
+
+    window.open("AddEvent.html","_self");
+
+
+}
+
+
+
 
 function getData(){
 
