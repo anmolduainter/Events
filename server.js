@@ -132,44 +132,114 @@ app.get('/TodayEvents',function (req,res) {
 
    console.log(dateQ);
 
-   let time;
+
    let timeHr=date1.getHours();
    let timeMin=date1.getMinutes();
-   if (timeHr > 12){
-       time=((+timeHr) - 12)+":"+timeMin + " PM"
-   }
-   else if (timeHr<12 && timeHr!=0){
-       time= timeHr+":"+timeMin +  " AM"
-   }
 
-   else if (timeHr==0){
-       time="12"+":"+timeMin+" AM"
-   }
-   else if (timeHr ==12){
-       time="12"+":"+timeMin+" PM"
-   }
-
-   console.log(time)
+   console.log(timeHr)
 
 
 
     let arr=[];
+    let timeArr=[];
 
     db.collection('AllEvents').find({date:dateQ}).toArray(function (err,result) {
         if (err) throw err;
 
-        //sqldb.login.findAll()
+
 
         for(i of result){
 
+            let StartTime="";
+            let EndTime="";
+
             console.log(i.time);
 
-            let arrTime=i.time.split("-");
-            console.log(arrTime);
+            let arrTime=i.time.split(" - ");
 
-            if (time<arrTime){
-                console.log("less");
+
+            if (arrTime[0].length==7){
+                if (arrTime[0].substr(5,6)=="AM"){
+                    StartTime = arrTime[0].substr(0,1)
+                }
+                else if (arrTime[0].substr(5,6)=="PM"){
+                    StartTime = (+(arrTime[0].substr(0,1))+12)
+                }
             }
+
+            else if (arrTime[0].length==8){
+                if (arrTime[0].substr(6,7)=="AM") {
+                    if (arrTime[0].substr(0, 2) == 12) {
+                        StartTime=0;
+                    }
+                    else {
+                        StartTime = arrTime[0].substr(0, 2)
+                    }
+                }
+                else if (arrTime[0].substr(6,7)=="PM") {
+                    if (arrTime[0].substr(0, 2) == 12) {
+                        StartTime = 0;
+                    }
+                    else {
+                        StartTime = (+(arrTime[0].substr(0, 2)) + 12)
+                    }
+                }
+            }
+
+
+
+            if (arrTime[1].length==7){
+                if (arrTime[1].substr(5,6)=="AM"){
+                    EndTime = arrTime[1].substr(0,1)
+                }
+                else if (arrTime[1].substr(5,6)=="PM"){
+                    EndTime = (+(arrTime[1].substr(0,1))+12)
+                }
+            }
+
+            else if (arrTime[1].length==8){
+                if (arrTime[1].substr(6,7)=="AM") {
+                    if (arrTime[1].substr(0, 2) == 12) {
+                        EndTime=0;
+                    }
+                    else {
+                        EndTime = arrTime[0].substr(0, 2)
+                    }
+                }
+                else if (arrTime[1].substr(6,7)=="PM") {
+                    if (arrTime[1].substr(0, 2) == 12) {
+                        EndTime = 0;
+                    }
+                    else {
+                        EndTime = (+(arrTime[1].substr(0, 2)) + 12)
+                    }
+                }
+            }
+
+
+
+
+            let What="";
+
+            if (timeHr<StartTime){
+                What="Starting Today"
+            }
+            else if (timeHr>StartTime && timeHr<EndTime){
+
+                What="Going On"
+
+            }
+            else if (timeHr>EndTime){
+
+                What="Closed"
+
+            }
+
+
+            console.log(What);
+
+            timeArr.push(What);
+
 
             sqldb.login.findAll({where:{id:i.Sql}}).then(function (result) {
 
@@ -180,8 +250,7 @@ app.get('/TodayEvents',function (req,res) {
 
         }
 
-        // console.log(result[0].Sql);
-        //
+
         let done=false;
         let idInterval= setInterval(function () {
 
@@ -191,7 +260,7 @@ app.get('/TodayEvents',function (req,res) {
 
             else if (arr.length==result.length){
 
-                res.send({result,arr});
+                res.send({result,arr,timeArr});
                 done=true;
             }
             else{

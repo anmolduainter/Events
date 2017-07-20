@@ -53,19 +53,20 @@ function getAllEvents(){
     <div class="row">
 
         <div class="col text-center">
-            <img src="${res.result[i].imgUrl}" width="400px" height="300px">
+            <img class="image" src="${res.result[i].imgUrl}" width="400px" height="300px">
         </div>
 
-        <div class="col text-center">
+        <div class="col text-center anim">
             <h1>${res.result[i].name}</h1>
             <h2>${res.result[i].date} (${res.result[i].time})</h2>
             <p>${res.result[i].desc}</p>
             <br>
+            <h2>${res.timeArr[i]}</h2>
             <br>
             <p class="pull-right">For more details : -${res.arr[i].phone} (${res.arr[i].username})</p>
             <br>
-           <button class="btn btn-secondary">Interested</button>
-           <button class="btn btn-secondary">Going</button>
+           <button class="btn btn-secondary">Like</button>
+           <button class="btn btn-secondary">Not Like</button>
         </div>
 
     </div>

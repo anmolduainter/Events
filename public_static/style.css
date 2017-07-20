@@ -7,10 +7,24 @@
 
 }
 
-.jumbotron > h1{
+#EventAnim{
 
     font-weight: bold;
     font-size: 100px;
+
+}
+#AboutEvent{
+    font-weight: bold;
+    font-size: 100px;
+    animation-fill-mode:forwards ;
+    animation-duration: 1s;
+}
+#TopEvent{
+    font-weight: bold;
+    font-size: 100px;
+
+    animation-fill-mode:forwards ;
+    animation-duration: 1s;
 
 }
 
@@ -26,7 +40,8 @@
 
     font-size: 40px;
     border-radius: 100px;
-    background: darkblue;
+    background: mintcream;
+    color: black;
 }
 
 #viewEventBtn{
@@ -57,5 +72,20 @@
     width: auto;
     height: auto;
     z-index: -100;
+}
 
+h2{
+
+    font-size: 30px ;
+    color: white;
+}
+
+@keyframes anim {
+
+    from{
+        transform: matrix(2,0,0,2,0,0);
+    }
+    to{
+        transform: matrix(1,0,0,1,0,0);
+    }
 }

@@ -59,10 +59,10 @@ function getData(){
             bodyString+=`    <div id="${i}" class="row">
 
         <div class="col text-center">
-            <img src="${data[i].imgUrl}" width="400px" height="300px">
+            <img class="image" src="${data[i].imgUrl}" width="400px" height="300px">
         </div>
 
-        <div class="col text-center">
+        <div class="col text-center anim">
             <h1>${data[i].name}</h1>
             <h2>${data[i].date} (${data[i].time})</h2>
             <p>${data[i].desc}</p>

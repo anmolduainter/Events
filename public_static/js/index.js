@@ -4,10 +4,17 @@
 
 let login;
 let putEventBtn;
+let eventAnim;
+let AboutEvent;
+let TopEvents;
 
 $(function () {
 
    login=$('#login');
+
+   eventAnim=$('#EventAnim');
+   AboutEvent=$('#AboutEvent');
+   TopEvents=$('#TopEvent');
 
    putEventBtn=$('#putEventBtn')
 
@@ -22,6 +29,44 @@ $(function () {
         window.open('Register.html','_self');
 
     })
+
+
+    $(window).on('scroll',function () {
+
+
+        if ($(window).scrollTop() > 160) {
+
+
+            AboutEvent.css('animation-name','anim')
+
+
+        } else {
+
+            AboutEvent.css('animation-name','')
+
+        }
+
+
+        if ($(window).scrollTop() > 550) {
+
+
+            TopEvents.css('animation-name','anim')
+
+
+        } else {
+
+            TopEvents.css('animation-name','')
+
+        }
+
+
+    });
+
+
+   console.log($(window).width())
+    console.log($(window).height());
+   console.log($(window).scrollTop())
+
 
 
 });
