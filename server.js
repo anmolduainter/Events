@@ -8,6 +8,7 @@ const passport=require('./passport/PassPort.js');
 const UserLogin=require('./routers/login');
 const Events=require('./routers/Events');
 const AddEvents=require('./routers/AddEvents');
+const deleteEvents=require('./routers/DeleteEvent');
 let app=express();
 
 app.use(cp('somesecret1'));
@@ -38,29 +39,9 @@ app.use('/private',checkedlogin,express.static(path.join(__dirname+"/private_sta
 app.use('/login',UserLogin);
 app.use('/Events',Events);
 app.use('/AddEvents',AddEvents);
+app.use('/DeleteEvents',deleteEvents);
 
-// app.post('/delete',function (req,res) {
-//
-//     db.collection('AllEvents').deleteMany({},function (err,result) {
-//
-//         res.send("Deleted");
-//
-//     })
-//
-// });
-//
-//
-// app.post('/deleteOneEvent',function (req,res) {
-//
-//     db.collection('AllEvents').deleteOne({Sql:req.body.id,name:req.body.name,date:req.body.date,time:req.body.time},function (err,result) {
-//
-//         res.send({success:true});
-//
-//     })
-//
-//
-// });
-//
+
 //
 // app.post('/updateEditEvent',function (req,res) {
 //
