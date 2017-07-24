@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EvntTel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../public_static/style.css"/>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.2.1.js"></script>
+    <!--<script src="js/index.js"></script>-->
+</head>
+<body>
+
+<nav style="background: transparent" class="navbar navbar-toggleable-md navbar-inverse bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a style="font-size: 30px" class="navbar-brand" href="#">Events</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="viewEvent.html">All Events<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="TodayEvent.html">Todays Events</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Past Events</a>
+            </li>
+        </ul>
+        <!--<form class="form-inline my-2 my-lg-0">-->
+            <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+            {{# if loggedIn}}
+                <h2>Welcome {{user.email}}</h2>
+                <button id="logout" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">LogOut</button>
+
+            {{else}}
+                <button id="login" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Login</button>
+
+            {{/if}}
+        <!--</form>-->
+    </div>
+</nav>
+
+
+
+<div class="container">
+    <video autoplay loop id="video-background" muted plays-inline>
+        <source src="assets/dance1.mp4">
+    </video>
+    <div class="row">
+        <div class="col text-center">
+           <div class="jumbotron">
+               <h1 id="EventAnim">Events</h1>
+           </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row" id="Top-part">
+        <div class="col text-center">
+            <h2 style="color: #eeeeee">Hurry Up It's Free</h2>
+            <br>
+            <div class="btn btn-primary" id="putEventBtn">Register Your Events</div>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col text-center">
+            <div class="jumbotron">
+                <h1 id="AboutEvent">About</h1>
+                <br>
+                <br>
+                <br>
+                <h2>There are lots of events.<br><br>Events like dancing,singing,dj etc.So Which event is the best.<br><br>You will find it here.</h2>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col text-center">
+            <div class="jumbotron">
+                <h1 id="TopEvent">Top Events</h1>
+                <br>
+                <br>
+                <br>
+                <h2>All Events will be taken into account <br><br> With their number of likes , dislikes , interested and going <br><br> And <br><br>Will be ranked according to the score.</h2>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col">
+
+            <img src="images/android.png" height="500px" alt="Android Phone">
+
+        </div>
+        <div class="col text-center">
+            <br>
+            <br>
+            <br>
+            <h2 style="font-size: 50px">Coming Soon</h2>
+            <br>
+            <br>
+            <br>
+            <img src="images/google.png" height="100px" alt="Play">
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

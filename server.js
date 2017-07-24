@@ -9,7 +9,11 @@ const UserLogin=require('./routers/login');
 const Events=require('./routers/Events');
 const AddEvents=require('./routers/AddEvents');
 const deleteEvents=require('./routers/DeleteEvent');
+const updateEvents=require('./routers/updateEvents');
+const Main=require('./routers/Pages')
 let app=express();
+
+app.set('view engine','hbs');
 
 app.use(cp('somesecret1'));
 
@@ -33,35 +37,20 @@ function checkedlogin(req,res,next){
     else{
         res.status(404).send("Unauthorized");
     }
-}
-app.use('/public',express.static(path.join(__dirname+"/public_static")))
-app.use('/private',checkedlogin,express.static(path.join(__dirname+"/private_static")));
+ }
+//app.use('/',express.static(path.join(__dirname+"/public_static")))
+// app.use('/private',checkedlogin,express.static(path.join(__dirname+"/private_static")));
+app.use('/',Main);
 app.use('/login',UserLogin);
 app.use('/Events',Events);
 app.use('/AddEvents',AddEvents);
 app.use('/DeleteEvents',deleteEvents);
+app.use('/updateEvents',updateEvents);
 
+app.listen(3000,function(){
+    console.log("Server Started");
+});
 
-//
-// app.post('/updateEditEvent',function (req,res) {
-//
-//     let oldObj={Sql:req.body.id,name:req.body.name,date:req.body.date,time:req.body.time}
-//
-//     let newObj={$set : {imgUrl:req.body.imageUrl,name:req.body.name1,date:req.body.date1,time:req.body.time1,desc:req.body.desc1}}
-//
-//     db.collection('AllEvents').updateOne(oldObj,newObj,function (err,result) {
-//
-//         console.log(result);
-//
-//         res.send({success:true});
-//
-//     })
-//
-//
-// });
-//
-//
-//
 
 //
 //
@@ -97,6 +86,3 @@ app.use('/DeleteEvents',deleteEvents);
 //    })
 //
 // })
-app.listen(3000,function(){
-    console.log("Server Started");
-});

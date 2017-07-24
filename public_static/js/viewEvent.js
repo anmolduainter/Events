@@ -15,7 +15,7 @@ $(function () {
 function getAllEvents(){
 
 
-   $.get('/AllEvents',function(res){
+   $.get('/Events',function(res){
        let bodyString=" ";
 
 
