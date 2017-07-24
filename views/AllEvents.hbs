@@ -46,13 +46,15 @@
               <br>
               <button class="btn btn-secondary">Interested</button>
               <button class="btn btn-secondary">Going</button>
+              {{#if ../LoggedIn}}
+                  <button class="btn btn-secondary">Star</button>
+              {{/if}}
           </div>
 
       </div>
       <br>
       <hr>
       <br>
-
 
   {{/each}}
 

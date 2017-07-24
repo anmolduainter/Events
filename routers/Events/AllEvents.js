@@ -10,6 +10,15 @@ let url = 'mongodb://localhost:27017/myproject';
 
 router.get('/',(req,res)=>{
 
+    let loggedIn;
+
+    if (req.user==undefined){
+        loggedIn=false;
+    }
+    else{
+        loggedIn=true
+    }
+
     MongoClient.connect(url,function (err,db) {
         if (err) throw err;
         let arr=[];
@@ -29,7 +38,8 @@ router.get('/',(req,res)=>{
                 else if (arr.length==result.length){
 
 
-                    res.render('AllEvents',{Result:result,Arr:arr})
+                    console.log(loggedIn);
+                    res.render('AllEvents',{Result:result,Arr:arr,LoggedIn:loggedIn})
                     // res.send({result,arr});
 
                     done=true;
