@@ -8,12 +8,15 @@ const MongoClient = require('mongodb').MongoClient;
 
 let url = 'mongodb://localhost:27017/myproject';
 
-router.post('/',(req,res)=>{
+router.get('/',(req,res)=>{
     MongoClient.connect(url,(err,db)=>{
         if (err) throw err;
-        db.collection('AllEvents').find({Sql:req.body.id}).toArray(function (err,result) {
+        let usrId=req.user[0].dataValues.id;
+        console.log("User iD: " + usrId);
+        db.collection('AllEvents').find({Sql:usrId.toString()}).toArray(function (err,result) {
             if (err) throw err;
-            res.send(result)
+             console.log(result.length)
+            res.send({result:result,count:result.length})
         });
         db.close();
     }) ;

@@ -1,4 +1,30 @@
+#Fav{
 
+    color: white;
+    cursor: pointer;
+    background:transparent;
+    margin: 100px 100px 0px 100px;
+    padding: 20px 20px 20px 20px;
+    border-radius: 100px;
+    border-style: solid;
+    border-color: grey;
+    border-width:5px;
+}
+h3{
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#YrEvents{
+    color: white;
+    cursor:pointer;
+    margin: 100px 90px 0px 90px;
+    padding: 20px 20px 20px 20px;
+    border-radius: 100px;
+    border-style: solid;
+    border-color: grey;
+    border-width:5px;
+}
 
 .jumbotron{
 

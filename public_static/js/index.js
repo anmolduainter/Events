@@ -10,25 +10,46 @@ let TopEvents;
 
 $(function () {
 
-   // login=$('#login');
-
    eventAnim=$('#EventAnim');
    AboutEvent=$('#AboutEvent');
    TopEvents=$('#TopEvent');
 
-  // putEventBtn=$('#putEventBtn')
+   let YouEv=$('#YrEvents');
 
-   // login.click(function () {
-   //
-   //     window.open('login.html','_self');
-   //
-   // })
+   YouEv.hover(function () {
 
-    // putEventBtn.click(function () {
-    //
-    //     window.open('Register.html','_self');
-    //
-    // })
+       console.log("Hello");
+       let dataCount;
+
+       $.get('/Events/YourEvents',(data)=>{
+
+           YouEv.empty();
+
+           dataCount=data.count;
+
+           let body=$(`<h3>Your Events</h3><br><br><br><h4>Your Events Number : ${dataCount}</h4>`)
+
+           YouEv.css('background','white').css('color','black').css('border-radius','20px').css('transition','background 2s,color 2s,border-radius 2s');
+
+           body.hide().appendTo(YouEv).fadeIn(500);
+
+           console.log(dataCount);
+
+       });
+
+
+   },function () {
+
+       YouEv.empty();
+
+       let body=$(`<h3>Your Events</h3>`)
+
+       YouEv.css('background','transparent').css('color','white').css('border-radius','100px').css('transition','background 2s,color 2s,border-radius 2s');
+
+       body.hide().appendTo(YouEv).fadeIn(500);
+
+
+   });
 
 
     $(window).on('scroll',function () {

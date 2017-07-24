@@ -51,6 +51,23 @@
     <video autoplay loop id="video-background" muted plays-inline>
         <source src="/assets/dance1.mp4">
     </video>
+    {{# if loggedIn}}
+
+        <div class="row">
+            <div class="col text-center">
+                <div id="Fav">
+                <h3>Favourites</h3>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div id="YrEvents">
+                <h3>Your Events</h3>
+                </div>
+            </div>
+        </div>
+
+
+    {{else}}
     <div class="row">
         <div class="col text-center">
            <div class="jumbotron">
@@ -116,6 +133,8 @@
             <img src="images/google.png" height="100px" alt="Play">
         </div>
     </div>
+
+    {{/if}}
 
 
 </div>
