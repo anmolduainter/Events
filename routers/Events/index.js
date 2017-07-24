@@ -7,4 +7,5 @@ const router=require('express').Router();
 router.use('/',require('./AllEvents'));
 router.use('/TodayEvents',require('./TodayEvents'));
 router.use('/YourEvents',require('./YourEvents'));
+router.use('/BookMark',require('./BookMark'));
 module.exports=router;
