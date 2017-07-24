@@ -10,25 +10,25 @@ let TopEvents;
 
 $(function () {
 
-   login=$('#login');
+   // login=$('#login');
 
    eventAnim=$('#EventAnim');
    AboutEvent=$('#AboutEvent');
    TopEvents=$('#TopEvent');
 
-   putEventBtn=$('#putEventBtn')
+  // putEventBtn=$('#putEventBtn')
 
-   login.click(function () {
+   // login.click(function () {
+   //
+   //     window.open('login.html','_self');
+   //
+   // })
 
-       window.open('login.html','_self');
-
-   })
-
-    putEventBtn.click(function () {
-
-        window.open('Register.html','_self');
-
-    })
+    // putEventBtn.click(function () {
+    //
+    //     window.open('Register.html','_self');
+    //
+    // })
 
 
     $(window).on('scroll',function () {

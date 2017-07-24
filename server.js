@@ -6,6 +6,7 @@ const session=require('express-session');
 const cp=require('cookie-parser');
 const passport=require('./passport/PassPort.js');
 const UserLogin=require('./routers/login');
+const UserLogout=require('./routers/logOut');
 const Events=require('./routers/Events');
 const AddEvents=require('./routers/AddEvents');
 const deleteEvents=require('./routers/DeleteEvent');
@@ -40,8 +41,10 @@ function checkedlogin(req,res,next){
  }
 //app.use('/',express.static(path.join(__dirname+"/public_static")))
 // app.use('/private',checkedlogin,express.static(path.join(__dirname+"/private_static")));
+app.use(express.static(__dirname + '/public_static'));
 app.use('/',Main);
 app.use('/login',UserLogin);
+app.use('/logout',UserLogout);
 app.use('/Events',Events);
 app.use('/AddEvents',AddEvents);
 app.use('/DeleteEvents',deleteEvents);

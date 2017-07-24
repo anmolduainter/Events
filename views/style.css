@@ -1,0 +1,91 @@
+
+
+.jumbotron{
+
+  background: transparent;
+    color: mintcream;
+
+}
+
+#EventAnim{
+
+    font-weight: bold;
+    font-size: 100px;
+
+}
+#AboutEvent{
+    font-weight: bold;
+    font-size: 100px;
+    animation-fill-mode:forwards ;
+    animation-duration: 1s;
+}
+#TopEvent{
+    font-weight: bold;
+    font-size: 100px;
+
+    animation-fill-mode:forwards ;
+    animation-duration: 1s;
+
+}
+
+#putEventBtn{
+
+    font-size: 25px;
+    font-weight: 100;
+    border-radius: 10px;
+    transition: font-size 1s,border-radius 1s;
+}
+
+#putEventBtn:hover{
+
+    font-size: 40px;
+    border-radius: 100px;
+    background: mintcream;
+    color: black;
+}
+
+#viewEventBtn{
+
+
+    font-size: 25px;
+    font-weight: 100;
+    border-radius: 10px;
+    transition: font-size 1s,border-radius 1s;
+
+}
+
+#viewEventBtn:hover{
+
+    font-size: 40px;
+    border-radius: 100px;
+    background: darkblue;
+}
+
+
+#video-background{
+
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height:100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+}
+
+h2{
+
+    font-size: 30px ;
+    color: white;
+}
+
+@keyframes anim {
+
+    from{
+        transform: matrix(2,0,0,2,0,0);
+    }
+    to{
+        transform: matrix(1,0,0,1,0,0);
+    }
+}
