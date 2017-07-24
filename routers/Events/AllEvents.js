@@ -27,7 +27,11 @@ router.get('/',(req,res)=>{
                     clearInterval(idInterval);
                 }
                 else if (arr.length==result.length){
-                    res.send({result,arr});
+
+
+                    res.render('AllEvents',{Result:result,Arr:arr})
+                    // res.send({result,arr});
+
                     done=true;
                 }
                 else{

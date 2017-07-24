@@ -83,11 +83,7 @@ $(function () {
 
     });
 
-
    console.log($(window).width())
     console.log($(window).height());
    console.log($(window).scrollTop())
-
-
-
 });
