@@ -34,12 +34,42 @@ router.post('/',(req,res)=>{
 
             let query={
                 login_id:UserId,
-                events_id:EventId
-            }
+                events_id:EventId.toString()
+            };
 
-            Sqldb.fav.create(query).then((resultQuery)=>{
-                console.log(resultQuery);
-            })
+            Sqldb.fav.findAll({where:query}).then((resultQuery)=>{
+
+                if (resultQuery.length==0){
+
+                    Sqldb.fav.create(query).then((resultCre)=>{
+                        console.log(resultCre);
+                        if (resultCre){
+                            res.send({success:true});
+                        }
+                        else{
+                            res.send({success:false})
+                        }
+                    })
+
+
+                }
+
+                else{
+
+                    Sqldb.fav.destroy({where:query}).then((resultDel)=>{
+
+                        if (resultDel==1){
+                            res.send({success:false})
+                        }
+                        else{
+                            res.send({success:true});
+                        }
+
+                    })
+
+                }
+
+            });
 
 
         });
