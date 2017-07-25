@@ -6,10 +6,60 @@
 $(function () {
 
    let bookMark=$('.bookMarks');
+   let interest=$('.interest');
+   let going=$('.going');
 
+   interest.click(interested);
    bookMark.click(bookMarkClicked);
 
 });
+
+function interested(ev){
+
+    console.log("Interested Clicked");
+
+    let id=$(this).parent().attr('id');
+    console.log('intereted : '+id);
+    if (id==undefined){
+        alert("Please Try Again Later");
+    }
+
+    else{
+
+        let name=$(this).parent().find('h1').text();
+        let date=$(this).parent().find('h2').text().substr(0,10);
+        let time=$(this).parent().find('h2').text().replace(date+" ",'')
+        let Ptime;
+        if (time.length==19){
+            Ptime=$(this).parent().find('h2').text().replace(date+" ",'').substr(1,17);
+        }
+        else if(time.length==20){
+            Ptime=$(this).parent().find('h2').text().replace(date+" ",'').substr(1,18);
+        }
+        else if(time.length==21){
+            Ptime=$(this).parent().find('h2').text().replace(date+" ",'').substr(1,19);
+        }
+        console.log(name);
+        console.log(date);
+        console.log(time);
+        console.log(Ptime);
+
+        let postQ={
+            name:name,
+            date:date,
+            time:Ptime
+        };
+
+        $.post('/Events/Interest',postQ,(data)=>{
+
+
+
+        });
+
+
+    }
+
+}
 
 
 function bookMarkClicked(ev){
