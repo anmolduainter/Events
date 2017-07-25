@@ -51,12 +51,12 @@ function bookMarkClicked(ev){
 
          if (data.success){
 
-            $(this).css('transform','scale(2)').css('transition','transform 1s');
+            $(this).css('transform','scale(1.3)').css('background','red').css('transition','transform 1s');
 
          }
          else{
 
-             $(this).css('transform','scale(1)').css('transition','transform 1s');
+             $(this).css('transform','scale(1)').css('background','').css('transition','transform 1s');
 
          }
 
