@@ -40,7 +40,7 @@ router.get('/',(req,res)=>{
 
                     console.log(loggedIn);
                     res.render('AllEvents',{Result:result,Arr:arr,LoggedIn:loggedIn})
-                  //   res.send({result,arr});
+                   // res.send({result,arr});
 
                     done=true;
                 }

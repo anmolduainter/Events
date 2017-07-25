@@ -26,13 +26,7 @@ module.exports = (sequelize,Datatypes)=>{
             type:Datatypes.DataTypes.STRING,
             allowNull:false
 
-        },
-
-        favCount:{
-            type:Datatypes.DataTypes.BIGINT,
-            allowNull:false
-        },
-
+        }
     },{
         underscored:true
     });
