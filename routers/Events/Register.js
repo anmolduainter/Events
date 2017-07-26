@@ -28,7 +28,7 @@ router.post('/',(req,res)=> {
             if (req.user==undefined){
 
                 console.log("not Authorized");
-                res.send("not Authorized");
+               // res.send("not Authorized");
 
             }
 

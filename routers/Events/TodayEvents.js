@@ -37,6 +37,7 @@ router.get('/',(req,res)=>{
         console.log(timeHr)
         let arr=[];
         let timeArr=[];
+        // let registerArr=[];
 
         db.collection('AllEvents').find({date:dateQ}).toArray(function (err,result) {
             if (err) throw err;
@@ -118,16 +119,18 @@ router.get('/',(req,res)=>{
 
                 if (timeHr<StartTime){
                     What="Starting Today"
+        //            registerArr.push(true)
                 }
                 else if (timeHr>StartTime && timeHr<EndTime){
 
                     What="Going On"
+        //            registerArr.push(true)
 
                 }
                 else if (timeHr>EndTime){
 
                     What="Closed"
-
+       //             registerArr.push(false)
                 }
 
 
@@ -141,10 +144,22 @@ router.get('/',(req,res)=>{
                     arr.push(new objc(result[0].username,result[0].phone));
                     console.log(arr);
 
+                });
+
+                sqldb.registerEvents.findAll({login_id:req.user[0].dataValues.id,events_id:result[0]._id.toString()}).then(function (result) {
+
+                      if (result==0){
+                          regArr.push(false);
+                      }
+                      else{
+                          regArr.push(true);
+                      }
+
                 })
 
             }
 
+            let regArr=[];
 
             let done=false;
             let idInterval= setInterval(function () {
@@ -161,8 +176,23 @@ router.get('/',(req,res)=>{
 
                     }
                     else{
+                        let LoggedIn;
+                        if (req.user==undefined){
 
-                        res.render('TodayEvent',{Result:result,Arr:arr,TimeArr:timeArr,Today:true});
+                            LoggedIn=false;
+                            // res.send("First Login");
+                            res.render('TodayEvent',{Result:result,Arr:arr,TimeArr:timeArr,Today:true,LoggedIn:LoggedIn});
+
+
+                        }
+                        else{
+                            LoggedIn=true;
+
+                            console.log(regArr);
+
+                            res.render('TodayEvent',{Result:result,Arr:arr,TimeArr:timeArr,Today:true,RegArr:regArr,LoggedIn:LoggedIn});
+
+                        }
 
 
                     }
@@ -177,7 +207,7 @@ router.get('/',(req,res)=>{
 
             },1000);
 
-        })
+        });
 
         db.close();
 

@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="/js/jquery-3.2.1.js"></script>
-    <!--<script src="/js/TodayEvent.js"></script>-->
+    <script src="/js/TodayEvent.js"></script>
 </head>
 <body>
 
@@ -35,22 +35,29 @@
                     <img class="image" src="{{result.imgUrl}}" width="400px" height="300px">
                 </div>
 
-                <div class="col text-center anim">
+                <div class="col text-center anim" id="{{@index}}">
                     <h1>{{result.name}}</h1>
                     <h2>{{result.date}} ({{result.time}})</h2>
                     <p>{{result.desc}}</p>
                     <br>
                     {{#with (lookup ../TimeArr @index)}}
-                    <h2>{{this}}</h2>
+                    <h3>{{this}}</h3>
                     {{/with}}
                     <br>
                     {{#with (lookup ../Arr @index)}}
                     <p class="pull-right">For more details : -{{this.phone}} ({{this.username}})</p>
                     {{/with}}
                     <br>
-                    <button class="btn btn-secondary">Like</button>
-                    <button class="btn btn-secondary">Not Like</button>
-                </div>
+               {{#if ../LoggedIn}}
+                 {{#if (lookup ../RegArr @index)}}
+                    <button style="margin: 0px 10px 0px 10px;background: white;color: black;" class="btn btn-primary pull-right Register">Register</button>
+                 {{else}}
+                    <button style="margin: 0px 10px 0px 10px" class="btn btn-primary pull-right Register">Register</button>
+                 {{/if}}
+                  {{else}}
+                   <button style="margin: 0px 10px 0px 10px" class="btn btn-primary pull-right Register">Register</button>
+               {{/if}}
+           </div>
 
             </div>
             <br>

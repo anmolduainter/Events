@@ -2,91 +2,65 @@
  * Created by anmol on 19/7/17.
  */
 
-
-let container;
-
 $(function () {
 
-    container=$('.container');
+    let register=$('.Register');
+    register.click(registerClick)
 
-    getAllEvents();
 
 });
 
-function getAllEvents(){
+function registerClick(ev){
 
+    console.log("Interested Clicked");
 
-    $.get('/TodayEvents',function(res){
+    let id=$(this).parent().attr('id');
+    console.log('intereted : '+id);
+    if (id==undefined){
+        alert("Please Try Again Later");
+    }
 
-        if (res.result.length==0){
+    else{
 
-            // console.log("HEllo")
-
-            let body=$(`<div class="row">
-        <div class="col text-center">
-            <div class="jumbotron">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png" height="100px">
-                <br>
-                <h2>No Event Today</h2>
-            </div>
-        </div>
-      </div>
-
-          `)
-
-            container.append(body);
-
-
+        let name=$(this).parent().find('h1').text();
+        let date=$(this).parent().find('h2').text().substr(0,10);
+        let time=$(this).parent().find('h2').text().replace(date+" ",'')
+        let Ptime;
+        if (time.length==19){
+            Ptime=$(this).parent().find('h2').text().replace(date+" ",'').substr(1,17);
         }
+        else if(time.length==20){
+            Ptime=$(this).parent().find('h2').text().replace(date+" ",'').substr(1,18);
+        }
+        else if(time.length==21){
+            Ptime=$(this).parent().find('h2').text().replace(date+" ",'').substr(1,19);
+        }
+        console.log("Name : "+name);
+        console.log("Date : "+date);
+        console.log("Time : "+time);
+        console.log("ParticularTime : "+Ptime);
 
-        else {
+        let postQ={
+            name:name,
+            date:date,
+            time:Ptime,
+        };
 
-            let bodyString = " ";
+        $.post('/Events/Register',postQ,(data)=>{
 
+            if(data.success){
 
-            console.log(res.arr)
-
-            for (i in res.result) {
-
-
-                bodyString += `
-    <div class="row">
-
-        <div class="col text-center">
-            <img class="image" src="${res.result[i].imgUrl}" width="400px" height="300px">
-        </div>
-
-        <div class="col text-center anim">
-            <h1>${res.result[i].name}</h1>
-            <h2>${res.result[i].date} (${res.result[i].time})</h2>
-            <p>${res.result[i].desc}</p>
-            <br>
-            <h2>${res.timeArr[i]}</h2>
-            <br>
-            <p class="pull-right">For more details : -${res.arr[i].phone} (${res.arr[i].username})</p>
-            <br>
-           <button class="btn btn-secondary">Like</button>
-           <button class="btn btn-secondary">Not Like</button>
-        </div>
-
-    </div>
-    <br>
-    <hr>
-    <br> `
+                $(this).css('background','white').css('color','black').css('transition','background 1s,color 1s')
 
             }
+            else{
+                alert("Already Registered");
+            }
+
+        });
 
 
-            console.log(bodyString);
-
-            let body=$(bodyString);
-
-            container.append(bodyString)
-
-
-        }
-
-    })
+    }
 
 
 }
