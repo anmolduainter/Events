@@ -8,5 +8,5 @@ router.use('/',require('./AllEvents'));
 router.use('/TodayEvents',require('./TodayEvents'));
 router.use('/YourEvents',require('./YourEvents'));
 router.use('/BookMark',require('./BookMark'));
-router.use('/Interest',require('./Interest'));
+router.use('/Register',require('./Register'));
 module.exports=router;

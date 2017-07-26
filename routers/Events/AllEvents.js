@@ -28,6 +28,7 @@ router.get('/',(req,res)=>{
         if (err) throw err;
         let arr=[];
         let fav=[];
+        let registerEv=[];
         db.collection('AllEvents').find({}).sort({date:1}).toArray(function (err,result) {
             if (err) throw err;
             for(i of result){
@@ -52,6 +53,25 @@ router.get('/',(req,res)=>{
                         }
 
                     })
+
+
+
+                    sqldb.registerEvents.findAll({where: {login_id: UserId, events_id: i._id.toString()}}).then((result) => {
+
+                        if (result.length == 0) {
+
+                            registerEv.push(false);
+
+                        }
+                        else {
+
+                            registerEv.push(true);
+
+                        }
+
+                    })
+
+
                 }
 
             }
@@ -67,7 +87,7 @@ router.get('/',(req,res)=>{
 
                     if (req.user!==undefined){
                         console.log(fav);
-                        res.render('AllEvents',{Result:result,Arr:arr,LoggedIn:loggedIn,Fav:fav});
+                        res.render('AllEvents',{Result:result,Arr:arr,LoggedIn:loggedIn,Fav:fav,Reg:registerEv});
                     }
 
                     else{

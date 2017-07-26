@@ -27,9 +27,13 @@ db.sequelize=sequelize;
 db.login=require('../models/login.js')(sequelize,Sequelize);
 db.fav=require('../models/Favourites.js')(sequelize,Sequelize);
 db.leader=require('../models/LeaderBoard.js')(sequelize,Sequelize);
+db.registerEvents=require('../models/RegisterEvent')(sequelize,Sequelize);
 
 db.fav.belongsTo(db.login);
 db.login.hasMany(db.fav);
+db.registerEvents.belongsTo(db.login);
+db.login.hasMany(db.registerEvents);
+
 
 sequelize.sync().then(function () {
     console.log("DataBase is ready");
