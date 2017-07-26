@@ -155,8 +155,19 @@ router.get('/',(req,res)=>{
 
                 else if (arr.length==result.length){
 
-                    res.send({result,arr,timeArr});
+                    if (result.length==0){
+
+                        res.render('TodayEvent',{Today:false})
+
+                    }
+                    else{
+
+                        res.render('TodayEvent',{Result:result,Arr:arr,TimeArr:timeArr,Today:true});
+
+
+                    }
                     done=true;
+
                 }
                 else{
 
@@ -172,5 +183,10 @@ router.get('/',(req,res)=>{
 
     })
 });
+
+function objc(username,phone){
+    this.username=username;
+    this.phone=phone
+}
 
 module.exports=router;

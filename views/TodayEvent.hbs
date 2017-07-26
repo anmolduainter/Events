@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TodayEvents</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/viewEvents.css"/>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="/js/jquery-3.2.1.js"></script>
+    <!--<script src="/js/TodayEvent.js"></script>-->
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron">
+                <h1>Today Events</h1>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+
+    {{#if Today}}
+
+        {{#each Result as |result|}}
+            <div class="row">
+
+                <div class="col text-center">
+                    <img class="image" src="{{result.imgUrl}}" width="400px" height="300px">
+                </div>
+
+                <div class="col text-center anim">
+                    <h1>{{result.name}}</h1>
+                    <h2>{{result.date}} ({{result.time}})</h2>
+                    <p>{{result.desc}}</p>
+                    <br>
+                    {{#with (lookup ../TimeArr @index)}}
+                    <h2>{{this}}</h2>
+                    {{/with}}
+                    <br>
+                    {{#with (lookup ../Arr @index)}}
+                    <p class="pull-right">For more details : -{{this.phone}} ({{this.username}})</p>
+                    {{/with}}
+                    <br>
+                    <button class="btn btn-secondary">Like</button>
+                    <button class="btn btn-secondary">Not Like</button>
+                </div>
+
+            </div>
+            <br>
+            <hr>
+            <br>
+        {{/each}}
+
+        {{else}}
+        <div class="row">
+            <div class="col text-center">
+                <div class="jumbotron">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png" height="100px">
+                    <br>
+                    <h2>No Event Today</h2>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+
+
+</div>
+
+</body>
+</html>
