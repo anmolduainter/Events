@@ -27,9 +27,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="Events/TodayEvents">Todays Events</a>
             </li>
+            {{#if loggedIn}}
             <li class="nav-item active">
-                <a class="nav-link" href="#">Past Events</a>
+                <a class="nav-link" href="Events/RegisteredEvents">Registered Events</a>
             </li>
+            {{/if}}
         </ul>
         <!--<form class="form-inline my-2 my-lg-0">-->
             <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->

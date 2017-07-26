@@ -9,4 +9,5 @@ router.use('/TodayEvents',require('./TodayEvents'));
 router.use('/YourEvents',require('./YourEvents'));
 router.use('/BookMark',require('./BookMark'));
 router.use('/Register',require('./Register'));
+router.use('/RegisteredEvents',require('./RegisteredEvents'));
 module.exports=router;
