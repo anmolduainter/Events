@@ -88,10 +88,16 @@ router.get('/',(req,res)=>{
                     if (req.user!==undefined){
                         console.log(fav);
                         res.render('AllEvents',{Result:result,Arr:arr,LoggedIn:loggedIn,Fav:fav,Reg:registerEv});
+
+                       // res.send({Result:result,Arr:arr,LoggedIn:loggedIn,Fav:fav,Reg:registerEv})
+
                     }
 
                     else{
                         res.render('AllEvents',{Result:result,Arr:arr,LoggedIn:loggedIn});
+
+                 //       res.send({Result:result,Arr:arr,LoggedIn:loggedIn})
+
                     }
                   //  res.send({result,arr,fav});
 

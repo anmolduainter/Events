@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="/js/jquery-3.2.1.js"></script>
-    <!--<script src="/js/index.js"></script>-->
+    <script src="/js/RegisteredEvents.js"></script>
 </head>
 <body>
 
@@ -26,8 +26,30 @@
     <br>
 
 
+    {{#each ResultArr as |result|}}
 
+        <div class="row">
 
+            <div class="col text-center">
+                <img class="image" src="{{result.imgUrl}}" width="400px" height="300px">
+            </div>
+
+            <div class="col text-center anim" id="{{@index}}">
+                <h1>{{result.name}}</h1>
+                <h2>{{result.date}} ({{result.time}})</h2>
+                <p>{{result.desc}}</p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <button class="btn btn-warning NotRegister">Not Register</button>
+            </div>
+
+        </div>
+        <br>
+        <hr>
+        <br>
+    {{/each}}
 
 </div>
 
