@@ -31,14 +31,6 @@ app.use(bp.json());
 app.use(passport.initialize())
 app.use(passport.session())
 
-function checkedlogin(req,res,next){
-    if (req.user){
-        next();
-    }
-    else{
-        res.status(404).send("Unauthorized");
-    }
- }
 //app.use('/',express.static(path.join(__dirname+"/public_static")))
 // app.use('/private',checkedlogin,express.static(path.join(__dirname+"/private_static")));
 app.use(express.static(__dirname + '/public_static'));

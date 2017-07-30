@@ -3,20 +3,6 @@
  */
 
 const router=require('express').Router();
-const passport=require('../../passport/PassPort.js');
-
-router.get('/',function (req,res) {
-    if (req.user==undefined){
-        res.render('login');
-    }
-    else{
-       res.redirect('/');
-    }
-});
-
-router.post('/',passport.authenticate('local',{
-    failureRedirect:'/',
-    successRedirect:'/'
-}));
+router.use('/',require('./web'));
 module.exports=router;
 
