@@ -11,7 +11,8 @@ const Events=require('./routers/Events');
 const AddEvents=require('./routers/AddEvents');
 const deleteEvents=require('./routers/DeleteEvent');
 const updateEvents=require('./routers/updateEvents');
-const Main=require('./routers/Pages')
+const Main=require('./routers/Pages');
+const Android=require('./routers/Android');
 let app=express();
 
 app.set('view engine','hbs');
@@ -41,6 +42,7 @@ app.use('/Events',Events);
 app.use('/AddEvents',AddEvents);
 app.use('/DeleteEvents',deleteEvents);
 app.use('/updateEvents',updateEvents);
+app.use('/Android',Android);
 
 app.listen(3000,function(){
     console.log("Server Started");
