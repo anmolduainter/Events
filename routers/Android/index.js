@@ -3,6 +3,5 @@
  */
 
 const router=require('express').Router();
-router.use('/',require('./login/afterLogin'));
-router.use('/b',require('./login/beforeLogin'));
+router.use('/',require('./login/beforeLogin'),require('./login/afterLogin'));
 module.exports=router;

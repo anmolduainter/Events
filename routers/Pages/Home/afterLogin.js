@@ -17,6 +17,7 @@ router.get('/',cel.ensureLoggedIn('/login'),(req,res,next)=>{
         else{
             console.log(user);
             res.render('index',{loggedIn:true,user:user})
+           // res.send({loggedIn:true,user:user})
         }
     });
 

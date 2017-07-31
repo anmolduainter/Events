@@ -55,7 +55,7 @@ app.use('/Events',Events);
 app.use('/AddEvents',AddEvents);
 app.use('/DeleteEvents',deleteEvents);
 app.use('/updateEvents',updateEvents);
-app.use('/Android',Android);
+app.use('/android',Android);
 // app.get('/auth/facebook/callback',(req,res)=>{
 //     res.redirect('/login/auth/facebook/callback');
 // });

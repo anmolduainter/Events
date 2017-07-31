@@ -17,8 +17,8 @@ const passport=require('../../passport/PassPort.js');
 // });
 
 router.post('/',passport.authenticate('local',{
-    failureRedirect:'/Android/b',
-    successRedirect:'/Android'
+    failureRedirect:'/android',
+    successRedirect:'/android'
 }));
 
 

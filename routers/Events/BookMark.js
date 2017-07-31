@@ -33,7 +33,7 @@ router.post('/',(req,res)=>{
             let EventId=result[0]._id;
 
             let query={
-                login_id:UserId,
+                user_id:UserId,
                 events_id:EventId.toString()
             };
 

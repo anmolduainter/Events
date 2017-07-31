@@ -12,7 +12,9 @@ router.get('/',(req,res,next)=>{
     console.log("............")
     //console.log(req.user);
     if (req.user==undefined){
-        res.render('index',{loggedIn:false});
+         res.render('index',{loggedIn:false});
+
+        //res.send({loggedIn:false})
     }
     else{
         console.log("afterLogin");
