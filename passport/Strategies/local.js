@@ -18,8 +18,21 @@ module.exports=new LocalStrategy(
         console.log(username);
         console.log(password);
 
-    db.login.findAll({where:{email:username,password:password}}).then(function (result) {
-        return done(null,result[0])
+    db.UserLocal.findOne
+    (
+        {
+            where:{
+                password:password
+            }
+        },
+        {
+            include:[{model:db.Users,where:{email:username}}]
+        }
+    ).then(function (result) {
+
+        //console.log(result);
+        return done(null,result)
+
     });
 
 });

@@ -23,16 +23,26 @@ let db={};
 
 db.Sequelize=Sequelize;
 db.sequelize=sequelize;
-
 db.login=require('../models/login.js')(sequelize,Sequelize);
+db.Users=require('../models/Login/login.js')(sequelize,Sequelize);
+db.UserLocal=require('../models/Login/userLocal.js')(sequelize,Sequelize);
+db.Userfacebook=require('../models/Login/facebook.js')(sequelize,Sequelize);
 db.fav=require('../models/Favourites.js')(sequelize,Sequelize);
 db.leader=require('../models/LeaderBoard.js')(sequelize,Sequelize);
 db.registerEvents=require('../models/RegisterEvent')(sequelize,Sequelize);
 
-db.fav.belongsTo(db.login);
-db.login.hasMany(db.fav);
-db.registerEvents.belongsTo(db.login);
-db.login.hasMany(db.registerEvents);
+
+db.UserLocal.belongsTo(db.Users);
+db.Users.hasOne(db.UserLocal);
+
+db.Userfacebook.belongsTo(db.Users);
+db.Users.hasOne(db.Userfacebook);
+//
+// db.fav.belongsTo(db.Users);
+// db.Users.hasMany(db.fav);
+
+db.registerEvents.belongsTo(db.Users);
+db.Users.hasMany(db.registerEvents);
 
 
 sequelize.sync().then(function () {
@@ -40,7 +50,7 @@ sequelize.sync().then(function () {
 });
 
 
-module.exports=db
+module.exports=db;
 
 
 

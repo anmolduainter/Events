@@ -35,7 +35,7 @@ router.post('/',(req,res)=> {
             else{
 
                 let query={
-                   login_id:req.user[0].dataValues.id,
+                   user_id:req.user[0].dataValues.id,
                     events_id:result[0]._id.toString()
                 };
 

@@ -10,11 +10,12 @@ router.get('/',cel.ensureLoggedIn('/login'),(req,res,next)=>{
 
     console.log(req.user[0].dataValues.id);
 
-    db.login.findOne({where:{id:req.user[0].dataValues.id}}).then((user)=>{
+    db.Users.findOne({where:{id:req.user[0].dataValues.id}}).then((user)=>{
         if (!user){
 
         }
         else{
+            console.log(user);
             res.render('index',{loggedIn:true,user:user})
         }
     });

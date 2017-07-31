@@ -14,7 +14,7 @@ module.exports = (sequelize,Datatypes)=>{
             allowNull:false
 
         },
-        events_id:{
+        user_id:{
             type:Datatypes.DataTypes.STRING,
             allowNull:false
         },

@@ -19,4 +19,9 @@ router.post('/',passport.authenticate('local',{
     successRedirect:'/'
 }));
 
+router.get('/auth/facebook',
+    passport.authenticate('facebook',{scope:['email']}));
+
+
+
 module.exports=router;

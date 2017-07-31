@@ -2,6 +2,8 @@
 const passport=require('passport');
 const db=require('../DataBase/sqlDatabase.js');
 const localStrategy=require('./Strategies/local.js');
+const FacebookStrategy=require('./Strategies/facebook.js');
+
 passport.serializeUser(function(user,done){
     console.log("Serealize");
     console.log("Serialize : "+user.id);
@@ -10,7 +12,7 @@ passport.serializeUser(function(user,done){
 
 passport.deserializeUser(function(id,done){
     console.log("Deserialize")
-    db.login.findAll({where:{id:id}}).then(function(user) {
+    db.Users.findAll({where:{id:id}}).then(function(user) {
         if (user) {
             done(null, user);
         } else {
@@ -21,7 +23,10 @@ passport.deserializeUser(function(id,done){
 
 
 });
+
 passport.use(localStrategy);
+passport.use(FacebookStrategy);
+
 module.exports=passport;
 
 

@@ -32,7 +32,7 @@ router.get('/',(req,res)=>{
         db.collection('AllEvents').find({}).sort({date:1}).toArray(function (err,result) {
             if (err) throw err;
             for(i of result){
-                sqldb.login.findAll({where:{id:i.Sql}}).then(function (result) {
+                sqldb.Users.findAll({where:{id:i.Sql}}).then(function (result) {
                     arr.push(new objc(result[0].username,result[0].phone));
                     console.log(arr);
                 });
@@ -56,7 +56,7 @@ router.get('/',(req,res)=>{
 
 
 
-                    sqldb.registerEvents.findAll({where: {login_id: UserId, events_id: i._id.toString()}}).then((result) => {
+                    sqldb.registerEvents.findAll({where: {user_id: UserId, events_id: i._id.toString()}}).then((result) => {
 
                         if (result.length == 0) {
 
@@ -145,7 +145,7 @@ router.get('/JSON',(req,res)=>{
         db.collection('AllEvents').find({}).sort({date:1}).toArray(function (err,result) {
             if (err) throw err;
             for(i of result){
-                sqldb.login.findAll({where:{id:i.Sql}}).then(function (result) {
+                sqldb.Users.findAll({where:{id:i.Sql}}).then(function (result) {
                     arr.push(new objc(result[0].username,result[0].phone));
                     console.log(arr);
                 });

@@ -16,7 +16,7 @@ router.get('/',(req,res)=> {
 
     MongoClient.connect(url, (err, db) => {
 
-        sqldb.registerEvents.findAll({where: {login_id: req.user[0].dataValues.id}}).then(function (result) {
+        sqldb.registerEvents.findAll({where: {user_id: req.user[0].dataValues.id}}).then(function (result) {
 
 
             for (i in result) {
@@ -79,7 +79,7 @@ router.post('/',(req,res)=>{
 
             console.log(result[0]._id);
 
-           sqldb.registerEvents.destroy({where:{login_id:req.user[0].dataValues.id,events_id:result[0]._id.toString()}}).then(function (row) {
+           sqldb.registerEvents.destroy({where:{user_id:req.user[0].dataValues.id,events_id:result[0]._id.toString()}}).then(function (row) {
 
                if (row==1){
                    res.send({success:true});

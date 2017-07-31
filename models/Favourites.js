@@ -16,8 +16,8 @@ module.exports = (sequelize,Datatypes)=>{
 
         },
 
-        login_id:{
-            type:Datatypes.DataTypes.INTEGER,
+        user_id:{
+            type:Datatypes.DataTypes.BIGINT,
             allowNull:false
         },
 
