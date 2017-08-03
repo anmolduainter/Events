@@ -29,7 +29,26 @@ router.get('/',(req,res)=>{
         let arr=[];
         let fav=[];
         let registerEv=[];
-        db.collection('AllEvents').find({}).sort({date:1}).toArray(function (err,result) {
+
+        let date1=new Date();
+        let dd = date1.getDate();
+        let mm = date1.getMonth()+1;
+        let yyyy = date1.getFullYear();
+
+        if(dd<10) {
+            dd = '0'+dd
+        }
+
+        if(mm<10) {
+            mm = '0'+mm
+        }
+
+        dateQ =yyyy + '-' + mm + '-' + dd;
+
+        console.log(dateQ);
+
+
+        db.collection('AllEvents').find({date:{$gte : dateQ}}).sort({date:1}).toArray(function (err,result) {
             if (err) throw err;
             for(i of result){
                 sqldb.Users.findAll({where:{id:i.Sql}}).then(function (result) {

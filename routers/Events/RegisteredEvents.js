@@ -14,6 +14,28 @@ router.get('/',(req,res)=> {
 
     let ResultArr=[];
 
+    let date1=new Date();
+    let dd = date1.getDate();
+    let mm = date1.getMonth()+1;
+    let yyyy = date1.getFullYear();
+
+    if(dd<10) {
+        dd = '0'+dd
+    }
+
+    if(mm<10) {
+        mm = '0'+mm
+    }
+
+    dateQ =yyyy + '-' + mm + '-' + dd;
+
+    console.log(dateQ);
+
+
+    let timeHr=date1.getHours();
+    let timeMin=date1.getMinutes();
+
+
     MongoClient.connect(url, (err, db) => {
 
         sqldb.registerEvents.findAll({where: {user_id: req.user[0].dataValues.id}}).then(function (result) {
@@ -59,6 +81,59 @@ router.get('/',(req,res)=> {
 
     })
 });
+
+
+router.get('/a',(req,res)=> {
+
+    let ResultArr=[];
+
+    MongoClient.connect(url, (err, db) => {
+
+        sqldb.registerEvents.findAll({where: {user_id: req.user[0].dataValues.id}}).then(function (result) {
+
+
+            for (i in result) {
+
+                let events_id = result[i].dataValues.events_id;
+                console.log(events_id);
+
+
+                if (err) throw err;
+
+                db.collection('AllEvents').find({_id:ObjectId(events_id)}).toArray(function (err, result) {
+
+                    if (err) throw err;
+                    //res.send(result);
+
+                    //  console.log(result[0]);
+
+                    // console.log(result[0].imgUrl);
+
+                    ResultArr.push(new objc(result[0].imgUrl,result[0].name,result[0].date,result[0].time,result[0].desc))
+
+
+                })
+
+            }
+
+
+            let clrId=setInterval(function () {
+
+                if (result.length==ResultArr.length){
+                    clearInterval(clrId);
+                    res.send({ResultArr:ResultArr});
+                }
+
+            },1000);
+
+            db.close();
+
+        })
+
+    })
+});
+
+
 
 
 

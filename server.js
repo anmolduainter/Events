@@ -56,49 +56,9 @@ app.use('/AddEvents',AddEvents);
 app.use('/DeleteEvents',deleteEvents);
 app.use('/updateEvents',updateEvents);
 app.use('/android',Android);
-// app.get('/auth/facebook/callback',(req,res)=>{
-//     res.redirect('/login/auth/facebook/callback');
-// });
-
-
 
 
 app.listen(3000,function(){
     console.log("Server Started");
 });
 
-
-//
-//
-//
-// app.post('/register',(req,res)=>{
-//
-//     sqldb.login.create({username : req.body.username,
-//                         password : req.body.password,
-//                         email : req.body.email,
-//                         phone: req.body.phone
-//                     }).then(function (data) {
-//
-//                        res.send({success:true,id:data.id,email:data.email});
-//
-//         }).catch(function (err) {
-//
-//           throw err;
-//
-//        })
-// });
-//
-// app.post('/registerCheck',(req,res)=>{
-//
-//    sqldb.login.findAll({where:{username:req.body.username}}).then(function(result){
-//
-//        if (typeof(result[0])=='undefined'){
-//            res.send({success:false})
-//        }
-//        else {
-//            res.send({success:true});
-//        }
-//
-//    })
-//
-// })
