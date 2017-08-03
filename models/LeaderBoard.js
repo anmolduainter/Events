@@ -14,18 +14,8 @@ module.exports = (sequelize,Datatypes)=>{
             allowNull:false
 
         },
-        user_id:{
+        events_id:{
             type:Datatypes.DataTypes.STRING,
-            allowNull:false
-        },
-        interested:{
-            type:Datatypes.DataTypes.BIGINT,
-            defaultValue:0,
-            allowNull:false
-        },
-        going:{
-            type:Datatypes.DataTypes.BIGINT,
-            defaultValue:0,
             allowNull:false
         },
         likes:{

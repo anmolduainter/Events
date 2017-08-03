@@ -44,6 +44,8 @@ db.Users.hasOne(db.Userfacebook);
 db.registerEvents.belongsTo(db.Users);
 db.Users.hasMany(db.registerEvents);
 
+db.leader.belongsTo(db.Users);
+db.Users.hasMany(db.leader);
 
 sequelize.sync().then(function () {
     console.log("DataBase is ready");
