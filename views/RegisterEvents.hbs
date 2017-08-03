@@ -42,7 +42,14 @@
                 <br>
                 <br>
                 <br>
-                <button class="btn btn-warning NotRegister">Not Register</button>
+                {{#if (lookup ../TimeArr @index)}}
+
+                    <button class="btn btn-primary NotRegister">Like</button>
+                    <button class="btn btn-danger NotRegister">Not Like</button>
+
+                 {{else}}
+                 <button class="btn btn-warning NotRegister">Not Register</button>
+                {{/if}}
             </div>
 
         </div>

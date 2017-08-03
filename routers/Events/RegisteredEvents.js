@@ -36,15 +36,20 @@ router.get('/',(req,res)=> {
     let timeMin=date1.getMinutes();
 
 
+    let timeArr=[];
+
     MongoClient.connect(url, (err, db) => {
 
         sqldb.registerEvents.findAll({where: {user_id: req.user[0].dataValues.id}}).then(function (result) {
+
+            let StartTime="";
+            let EndTime="";
 
 
             for (i in result) {
 
                 let events_id = result[i].dataValues.events_id;
-                console.log(events_id);
+                console.log(result[i]);
 
 
                 if (err) throw err;
@@ -58,6 +63,97 @@ router.get('/',(req,res)=> {
 
                     // console.log(result[0].imgUrl);
 
+
+                    console.log(result[0].time);
+
+
+                    let arrTime=result[0].time.split(" - ");
+
+
+                    if (arrTime[0].length==7){
+                        if (arrTime[0].substr(5,6)=="AM"){
+                            StartTime = arrTime[0].substr(0,1)
+                        }
+                        else if (arrTime[0].substr(5,6)=="PM"){
+                            StartTime = (+(arrTime[0].substr(0,1))+12)
+                        }
+                    }
+
+                    else if (arrTime[0].length==8){
+                        if (arrTime[0].substr(6,7)=="AM") {
+                            if (arrTime[0].substr(0, 2) == 12) {
+                                StartTime=0;
+                            }
+                            else {
+                                StartTime = arrTime[0].substr(0, 2)
+                            }
+                        }
+                        else if (arrTime[0].substr(6,7)=="PM") {
+                            if (arrTime[0].substr(0, 2) == 12) {
+                                StartTime = 0;
+                            }
+                            else {
+                                StartTime = (+(arrTime[0].substr(0, 2)) + 12)
+                            }
+                        }
+                    }
+
+
+
+                    if (arrTime[1].length==7){
+                        if (arrTime[1].substr(5,6)=="AM"){
+                            EndTime = arrTime[1].substr(0,1)
+                        }
+                        else if (arrTime[1].substr(5,6)=="PM"){
+                            EndTime = (+(arrTime[1].substr(0,1))+12)
+                        }
+                    }
+
+                    else if (arrTime[1].length==8){
+                        if (arrTime[1].substr(6,7)=="AM") {
+                            if (arrTime[1].substr(0, 2) == 12) {
+                                EndTime=0;
+                            }
+                            else {
+                                EndTime = arrTime[0].substr(0, 2)
+                            }
+                        }
+                        else if (arrTime[1].substr(6,7)=="PM") {
+                            if (arrTime[1].substr(0, 2) == 12) {
+                                EndTime = 0;
+                            }
+                            else {
+                                EndTime = (+(arrTime[1].substr(0, 2)) + 12)
+                            }
+                        }
+                    }
+
+
+                    if (dateQ>=result[0].date){
+
+
+
+                        if (timeHr<StartTime){
+
+                            timeArr.push(false);
+
+                        }
+                        else if (timeHr>StartTime && timeHr<EndTime){
+
+                            timeArr.push(false)
+
+                        }
+                        else if (timeHr>=EndTime){
+
+                            timeArr.push(true)
+
+
+                        }
+
+
+
+                    }
+
                     ResultArr.push(new objc(result[0].imgUrl,result[0].name,result[0].date,result[0].time,result[0].desc))
 
 
@@ -70,7 +166,8 @@ router.get('/',(req,res)=> {
 
                 if (result.length==ResultArr.length){
                     clearInterval(clrId);
-                    res.render('RegisterEvents',{ResultArr:ResultArr});
+                    console.log(timeArr);
+                    res.render('RegisterEvents',{ResultArr:ResultArr,TimeArr:timeArr});
                 }
 
             },1000);
