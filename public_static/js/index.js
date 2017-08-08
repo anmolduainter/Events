@@ -10,11 +10,16 @@ let TopEvents;
 
 $(function () {
 
+
    eventAnim=$('#EventAnim');
    AboutEvent=$('#AboutEvent');
    TopEvents=$('#TopEvent');
 
-   let YouEv=$('#YrEvents');
+
+   let Insidecontainer=$('#insideContainer');
+
+
+   let YouEv=$('#YourEvents');
 
    YouEv.hover(function () {
 
@@ -42,14 +47,70 @@ $(function () {
 
        YouEv.empty();
 
-       let body=$(`<h3>Your Events</h3>`)
+       let body=$(`<br><br><h1>Your Events</h1><br><br>`)
 
-       YouEv.css('background','transparent').css('color','white').css('border-radius','100px').css('transition','background 2s,color 2s,border-radius 2s');
+       YouEv.css('background','transparent').css('margin','100px 0px 0px 0px').css('color','white').css('border-radius','50px').css('transition','background 2s,color 2s,border-radius 2s');
 
        body.hide().appendTo(YouEv).fadeIn(500);
 
 
    });
+
+
+
+
+   YouEv.click(function () {
+
+
+       Insidecontainer.empty();
+
+       $.get('/Events/YourEvents',function (data) {
+
+           let row1=$(`<div class="row" id="back"><div class="col" style="cursor: pointer"><h2>Back</h2></div></div>`);
+
+           let row=$(`<div class="row"></div>`);
+
+           let body=``;
+
+           for (i in data.result){
+
+
+               body=body+`
+              <div class="col text-center">
+              <img width="300px" height="300px" src="${data.result[i].imgUrl}" >
+              <h1 style="color: white">${data.result[i].name}</h1>
+              <h2 style="color: white">${data.result[i].date} (${data.result[i].time})</h2>
+              <p style="color: white">${data.result[i].desc}</p>
+              <br>
+              <br>`;
+
+           }
+
+
+           let body1=$(body);
+
+           row.append(body1);
+
+           Insidecontainer.append(row1)
+           Insidecontainer.append(row)
+
+           let back=$('#back');
+
+           back.click(function () {
+
+               window.location.reload(true)
+
+           })
+
+
+       })
+
+
+
+
+
+   });
+
 
 
     $(window).on('scroll',function () {

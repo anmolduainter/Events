@@ -11,5 +11,5 @@ router.use('/BookMark',require('./BookMark'));
 router.use('/Register',require('./Register'));
 router.use('/RegisteredEvents',require('./RegisteredEvents'));
 router.use('/LikeEvents',require('./LikeEvents'));
-//router.use('/DisLike',require('./NotLikeEvents'));
+router.use('/DisLike',require('./NotLikeEvents'));
 module.exports=router;

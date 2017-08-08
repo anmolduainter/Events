@@ -55,7 +55,7 @@ function notLike(eve){
         time:Ptime
     };
 
-    $.post('/Events/NotLikeEvents',query,(data)=>{
+    $.post('/Events/Dislike',query,(data)=>{
 
 
         if (data.success){
