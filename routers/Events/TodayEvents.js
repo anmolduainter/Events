@@ -44,35 +44,35 @@ router.get('/',(req,res)=>{
 
 
 
-            for(i of result){
+            for(i of result) {
 
-                let StartTime="";
-                let EndTime="";
+                let StartTime = "";
+                let EndTime = "";
 
                 console.log(i.time);
 
-                let arrTime=i.time.split(" - ");
+                let arrTime = i.time.split(" - ");
 
 
-                if (arrTime[0].length==7){
-                    if (arrTime[0].substr(5,6)=="AM"){
-                        StartTime = arrTime[0].substr(0,1)
+                if (arrTime[0].length == 7) {
+                    if (arrTime[0].substr(5, 6) == "AM") {
+                        StartTime = arrTime[0].substr(0, 1)
                     }
-                    else if (arrTime[0].substr(5,6)=="PM"){
-                        StartTime = (+(arrTime[0].substr(0,1))+12)
+                    else if (arrTime[0].substr(5, 6) == "PM") {
+                        StartTime = (+(arrTime[0].substr(0, 1)) + 12)
                     }
                 }
 
-                else if (arrTime[0].length==8){
-                    if (arrTime[0].substr(6,7)=="AM") {
+                else if (arrTime[0].length == 8) {
+                    if (arrTime[0].substr(6, 7) == "AM") {
                         if (arrTime[0].substr(0, 2) == 12) {
-                            StartTime=0;
+                            StartTime = 0;
                         }
                         else {
                             StartTime = arrTime[0].substr(0, 2)
                         }
                     }
-                    else if (arrTime[0].substr(6,7)=="PM") {
+                    else if (arrTime[0].substr(6, 7) == "PM") {
                         if (arrTime[0].substr(0, 2) == 12) {
                             StartTime = 0;
                         }
@@ -83,26 +83,25 @@ router.get('/',(req,res)=>{
                 }
 
 
-
-                if (arrTime[1].length==7){
-                    if (arrTime[1].substr(5,6)=="AM"){
-                        EndTime = arrTime[1].substr(0,1)
+                if (arrTime[1].length == 7) {
+                    if (arrTime[1].substr(5, 6) == "AM") {
+                        EndTime = arrTime[1].substr(0, 1)
                     }
-                    else if (arrTime[1].substr(5,6)=="PM"){
-                        EndTime = (+(arrTime[1].substr(0,1))+12)
+                    else if (arrTime[1].substr(5, 6) == "PM") {
+                        EndTime = (+(arrTime[1].substr(0, 1)) + 12)
                     }
                 }
 
-                else if (arrTime[1].length==8){
-                    if (arrTime[1].substr(6,7)=="AM") {
+                else if (arrTime[1].length == 8) {
+                    if (arrTime[1].substr(6, 7) == "AM") {
                         if (arrTime[1].substr(0, 2) == 12) {
-                            EndTime=0;
+                            EndTime = 0;
                         }
                         else {
                             EndTime = arrTime[0].substr(0, 2)
                         }
                     }
-                    else if (arrTime[1].substr(6,7)=="PM") {
+                    else if (arrTime[1].substr(6, 7) == "PM") {
                         if (arrTime[1].substr(0, 2) == 12) {
                             EndTime = 0;
                         }
@@ -113,24 +112,22 @@ router.get('/',(req,res)=>{
                 }
 
 
+                let What = "";
 
-
-                let What="";
-
-                if (timeHr<StartTime){
-                    What="Starting Today"
-        //            registerArr.push(true)
+                if (timeHr < StartTime) {
+                    What = "Starting Today"
+                    //            registerArr.push(true)
                 }
-                else if (timeHr>StartTime && timeHr<EndTime){
+                else if (timeHr > StartTime && timeHr < EndTime) {
 
-                    What="Going On"
-        //            registerArr.push(true)
+                    What = "Going On"
+                    //            registerArr.push(true)
 
                 }
-                else if (timeHr>EndTime){
+                else if (timeHr > EndTime) {
 
-                    What="Closed"
-       //             registerArr.push(false)
+                    What = "Closed"
+                    //             registerArr.push(false)
                 }
 
 
@@ -139,24 +136,30 @@ router.get('/',(req,res)=>{
                 timeArr.push(What);
 
 
-                sqldb.login.findAll({where:{id:i.Sql}}).then(function (result) {
+                sqldb.login.findAll({where: {id: i.Sql}}).then(function (result) {
 
-                    arr.push(new objc(result[0].username,result[0].phone));
+                    arr.push(new objc(result[0].username, result[0].phone));
                     console.log(arr);
 
                 });
 
-                sqldb.registerEvents.findAll({login_id:req.user[0].dataValues.id,events_id:result[0]._id.toString()}).then(function (result) {
+                if (req.user !== undefined) {
 
-                      if (result==0){
-                          regArr.push(false);
-                      }
-                      else{
-                          regArr.push(true);
-                      }
+                    sqldb.registerEvents.findAll({
+                        login_id: req.user[0].dataValues.id,
+                        events_id: result[0]._id.toString()
+                    }).then(function (result) {
 
-                })
+                        if (result == 0) {
+                            regArr.push(false);
+                        }
+                        else {
+                            regArr.push(true);
+                        }
 
+                    })
+
+                }
             }
 
             let regArr=[];

@@ -113,6 +113,12 @@ $(function () {
 
 
 
+   let BookMark=$('#BookMark');
+
+   
+
+
+
     $(window).on('scroll',function () {
 
 
