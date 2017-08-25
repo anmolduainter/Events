@@ -3,21 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>LogIn</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
 <body>
-<form action="/login" method="post">
-    <input type="text" name="username" placeholder="username">
-    <br>
-    <input type="password" name="password" placeholder="password">
-    <br>
-    <input type="submit">
-</form>
+<div class="container">
+
+    <div class="row">
+        <div class="col text-center">
+            <div class="jumbotron">
+                <h1><b>Login</b></h1>
+            </div>
+        </div>
+    </div>
+
+    <form action="/login" method="post" class="text-center">
+        <div class="form-group col">
+        <input type="text" class="form-control" name="username" placeholder="username">
+        </div>
+        <br>
+        <div class="form-group col">
+        <input type="password" name="password" class="form-control" placeholder="password">
+        </div>
+        <br>
+        <input type="submit" class="btn btn-danger">
+    </form>
+
+
+</div>
 <br>
 <br>
 <br>
 
-
-<a href="login/auth/facebook" class="btn btn-primary">Facebook</a>
+<div class="row">
+    <div class="col text-center">
+        <a href="login/auth/facebook" class="btn btn-primary">
+            <i class="fa fa-facebook"></i> Login
+            <span class="hidden-xs-down">with Facebook</span>
+        </a>
+    </div>
+</div>
 
 </body>
 </html>

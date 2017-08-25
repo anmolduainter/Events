@@ -176,7 +176,16 @@ router.get('/',(req,res)=>{
 
                     if (result.length==0){
 
-                        res.send({Today:false})
+                        let LoggedIn
+
+                        if (req.user==undefined){
+                            LoggedIn=false;
+                            res.send({Today:false,LoggedIn:LoggedIn})
+                        }
+                        else{
+                            LoggedIn=true;
+                            res.send({Today:false,LoggedIn:LoggedIn})
+                        }
 
                     }
                     else{

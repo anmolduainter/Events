@@ -31,7 +31,7 @@ router.get('/',(req,res)=>{
 
                     let genre=$(this).children().children().eq(1).children().eq(4).text()
 
-                    console.log(href)
+                 //   console.log(href)
 
                     Arr.push(new objc(image,href,title,dateTime,evenue,genre))
 

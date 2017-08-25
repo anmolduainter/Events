@@ -32,7 +32,7 @@ router.get('/',(req,res)=>{
                     let genre=$(this).children().children().eq(1).children().eq(4).text()
 
 
-                    console.log(href)
+                  //  console.log(href)
 
                     Arr.push(new objc(image,href,title,dateTime,evenue,genre))
 
@@ -42,7 +42,10 @@ router.get('/',(req,res)=>{
                     if (image==undefined){
                         image=$(this).children().children().children().children().children().eq(2).attr('src')
                     }
-                    let href=$(this).children().children().eq(1).children().eq(1).attr("href")
+                    let href=$(this).children().children().eq(1).children().eq(1).attr("href");
+                    if (href===undefined){
+                        href=""
+                    }
                     let title=$(this).children().children().eq(1).children().eq(1).children().eq(0).text();
                     let dateTime=$(this).children().children().eq(1).children().eq(2).text()
                     let evenue=$(this).children().children().eq(1).children().eq(3).text()
@@ -53,7 +56,6 @@ router.get('/',(req,res)=>{
 
 
                     Arr.push(new objc(image,href,title,dateTime,evenue,genre))
-
                 }
 
             })

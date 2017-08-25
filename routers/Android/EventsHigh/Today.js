@@ -5,7 +5,6 @@
 
 const router=require('express').Router();
 
-const osmosis=require('osmosis');
 const cheerio=require('cheerio');
 const request=require('request');
 const URL="https://www.eventshigh.com/delhi/today";
@@ -25,13 +24,16 @@ router.get('/',(req,res)=>{
                 if (i==0){
                     let image=$(this).children().children().children().children().children().eq(2).attr('src')
                     let href=$(this).children().children().eq(1).children().eq(0).attr("href")
+
+                    if(href===undefined){
+                        href=''
+                    }
+
                     let title=$(this).children().children().eq(1).children().eq(0).children().eq(0).text();
                     let dateTime=$(this).children().children().eq(1).children().eq(1).text()
                     let evenue=$(this).children().children().eq(1).children().eq(2).text()
 
                     let genre=$(this).children().children().eq(1).children().eq(3).text()
-
-                    console.log(href)
 
                     Arr.push(new objc(image,href,title,dateTime,evenue,genre))
 
@@ -39,6 +41,11 @@ router.get('/',(req,res)=>{
                 else{
                     let image=$(this).children().children().children().children().children().eq(2).attr('data-original')
                     let href=$(this).children().children().eq(1).children().eq(0).attr("href")
+
+                    if (href===undefined){
+                        href=''
+                    }
+
                     let title=$(this).children().children().eq(1).children().eq(0).children().eq(0).text();
                     let dateTime=$(this).children().children().eq(1).children().eq(1).text()
                     let evenue=$(this).children().children().eq(1).children().eq(2).text()
