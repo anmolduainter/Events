@@ -1,6 +1,3 @@
-/**
- * Created by anmol on 22/7/17.
- */
 
 const router=require('express').Router();
 const sqldb=require('../../../DataBase/sqlDatabase.js');
@@ -10,9 +7,18 @@ let url = 'mongodb://localhost:27017/myproject';
 
 router.get('/',(req,res)=>{
 
+
+    //Connectiong MongoClient
     MongoClient.connect(url,(err,db)=>{
 
+        //if error occured then throw the error
         if (err) throw err;
+
+
+        /* Getting date object ( Current Date )
+         and getting date , month and year from this date object
+         and representing this in format yyyy-mm-dd
+         */
 
         let date1=new Date();
         let dd = date1.getDate();
@@ -32,19 +38,33 @@ router.get('/',(req,res)=>{
         console.log(dateQ);
 
 
+        /*
+          timeHr - getting Hours of current date
+           timeMin - getting Min of current date
+         */
+
         let timeHr=date1.getHours();
         let timeMin=date1.getMinutes();
-        console.log(timeHr)
+        console.log(timeHr);
         let arr=[];
         let timeArr=[];
         // let registerArr=[];
 
+
+
+        // Getting Events that are Today from collection of AllEvents
         db.collection('AllEvents').find({date:dateQ}).toArray(function (err,result) {
+
+
+            // if error occured then throw error
             if (err) throw err;
 
-
-
             for(i of result) {
+
+                /*
+                    Finding StartTime
+                    and Finding EndTime
+                 */
 
                 let StartTime = "";
                 let EndTime = "";
@@ -112,6 +132,11 @@ router.get('/',(req,res)=>{
                 }
 
 
+                /* What is a variable which takes : -
+                                           1. Starting Today
+                                           2. Going On
+                                           3. Closed
+                  */
                 let What = "";
 
                 if (timeHr < StartTime) {
@@ -137,6 +162,7 @@ router.get('/',(req,res)=>{
 
                 console.log(" i : "+i.Sql);
 
+                //getting Phone Number and username according to the event id
                 sqldb.Users.findAll({where: {id: i.Sql}}).then(function (result) {
 
                     arr.push(new objc(result[0].username, result[0].phone));
@@ -144,6 +170,10 @@ router.get('/',(req,res)=>{
 
                 });
 
+
+                 /*
+                     if user is logged in then getting registered events of users
+                 */
                 if (req.user !== undefined) {
 
                     sqldb.registerEvents.findAll({
@@ -151,6 +181,7 @@ router.get('/',(req,res)=>{
                         events_id: result[0]._id.toString()
                     }).then(function (result) {
 
+                        //if(result==0) then pushing false
                         if (result == 0) {
                             regArr.push(false);
                         }
@@ -165,19 +196,22 @@ router.get('/',(req,res)=>{
 
             let regArr=[];
 
+
             let done=false;
+
+            /*Response should only be send if
+             result length == arr length
+             if this is true then make done true and make the interval clear
+             */
             let idInterval= setInterval(function () {
 
                 if (done){
                     clearInterval(idInterval);
                 }
-
                 else if (arr.length==result.length){
 
                     if (result.length==0){
-
-                        let LoggedIn
-
+                        let LoggedIn;
                         if (req.user==undefined){
                             LoggedIn=false;
                             res.send({Today:false,LoggedIn:LoggedIn})
@@ -186,36 +220,24 @@ router.get('/',(req,res)=>{
                             LoggedIn=true;
                             res.send({Today:false,LoggedIn:LoggedIn})
                         }
-
                     }
                     else{
                         let LoggedIn;
                         if (req.user==undefined){
-
                             LoggedIn=false;
                             // res.send("First Login");
                             res.send({Result:result,Arr:arr,TimeArr:timeArr,Today:true,LoggedIn:LoggedIn});
-
-
                         }
                         else{
                             LoggedIn=true;
-
                             console.log(regArr);
-
                             res.send({Result:result,Arr:arr,TimeArr:timeArr,Today:true,RegArr:regArr,LoggedIn:LoggedIn});
-
                         }
-
-
                     }
                     done=true;
-
                 }
                 else{
-
                     clearInterval(idInterval);
-
                 }
 
             },1000);

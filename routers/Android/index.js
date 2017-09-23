@@ -7,4 +7,5 @@ router.use('/',require('./login/beforeLogin'),require('./login/afterLogin'));
 router.use('/Events',require('./Events'));
 router.use('/EventsHigh',require('./EventsHigh'));
 router.use('/BookMyShow',require('./BookMyShow'));
+router.use('/Insider',require('./Insider'));
 module.exports=router;

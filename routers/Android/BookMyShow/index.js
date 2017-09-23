@@ -42,6 +42,8 @@ router.get('/',(req,res)=>{
 
             Arr.push(new objc(image,title,day,date,tag,buyNow))
 
+           // Arr.push(new objc(image,href,title,dateTime,evenue,genre))
+
         });
 
         res.send(Arr)

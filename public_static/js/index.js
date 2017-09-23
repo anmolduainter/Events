@@ -61,9 +61,6 @@ $(function () {
 
    YouEv.click(function () {
 
-
-       Insidecontainer.empty();
-
        $.get('/Events/YourEvents',function (data) {
 
            let row1=$(`<div class="row" id="back"><div class="col" style="cursor: pointer"><h2>Back</h2></div></div>`);
@@ -113,9 +110,17 @@ $(function () {
 
 
 
-   let BookMark=$('#BookMark');
 
-   
+   ///////////ADD EVENTS////////////////////////////////////////
+
+
+   let AddEvents=$('#AddEvents');
+
+    AddEvents.click(function () {
+
+        window.location='/AddEvents/AddEventsL'
+
+    });
 
 
 

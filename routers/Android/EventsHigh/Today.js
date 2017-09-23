@@ -9,9 +9,25 @@ const cheerio=require('cheerio');
 const request=require('request');
 const URL="https://www.eventshigh.com/delhi/today";
 
+
+/*
+ -----------------Events High (Today) ------------------
+
+ 1. Image
+ 2. Href
+ 3. title
+ 4. dateTime
+ 5. evenue
+ 6. genre
+
+
+ */
+
 router.get('/',(req,res)=>{
 
     request(URL,function (err,response,html) {
+
+        console.log("------------------ Today --------------------")
 
         if (!err){
 
@@ -22,7 +38,10 @@ router.get('/',(req,res)=>{
             $('div#events-list div.col-md-3.col-sm-4.col-xs-12.box-padding.sidetag').each(function (i,element) {
 
                 if (i==0){
-                    let image=$(this).children().children().children().children().children().eq(2).attr('src')
+                    let image=$(this).children().children().eq(1).attr("style")
+
+                    console.log(image);
+
                     let href=$(this).children().children().eq(1).children().eq(0).attr("href")
 
                     if(href===undefined){
@@ -59,7 +78,7 @@ router.get('/',(req,res)=>{
 
                 }
 
-            })
+            });
 
             res.send(Arr);
         }

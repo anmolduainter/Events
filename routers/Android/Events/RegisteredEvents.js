@@ -1,14 +1,12 @@
-/**
- * Created by anmol on 26/7/17.
- */
-
 
 const router=require('express').Router();
-const sqldb=require('../../DataBase/sqlDatabase.js');
+
+const sqldb=require('../../../DataBase/sqlDatabase.js');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId=require('mongodb').ObjectId;
 
 let url = 'mongodb://localhost:27017/myproject';
+
 
 router.get('/',(req,res)=> {
 
@@ -57,11 +55,11 @@ router.get('/',(req,res)=> {
                 db.collection('AllEvents').find({_id:ObjectId(events_id)}).toArray(function (err, result) {
 
                     if (err) throw err;
-                   //res.send(result);
+                    //res.send(result);
 
-                  //  console.log(result[0]);
+                    //  console.log(result[0]);
 
-                    // console.log(result[0].imgUrl);
+                     // console.log(result[0].imgUrl);
 
 
                     console.log(result[0].time);
@@ -175,7 +173,7 @@ router.get('/',(req,res)=> {
                 if (result.length==ResultArr.length){
                     clearInterval(clrId);
                     console.log(timeArr);
-                    res.render('RegisterEvents',{ResultArr:ResultArr,TimeArr:timeArr});
+                    res.send({ResultArr:ResultArr,TimeArr:timeArr});
                 }
 
             },1000);
@@ -186,48 +184,6 @@ router.get('/',(req,res)=> {
 
     })
 });
-
-
-router.post('/',(req,res)=>{
-
-    MongoClient.connect(url,(err,db)=>{
-
-        let query={
-            name:req.body.name,
-            date:req.body.date,
-            time:req.body.time
-        };
-
-
-        db.collection('AllEvents').find(query).toArray(function (err,result) {
-
-            if (err) throw err;
-
-            console.log(result[0]._id);
-
-           sqldb.registerEvents.destroy({where:{user_id:req.user[0].dataValues.id,events_id:result[0]._id.toString()}}).then(function (row) {
-
-               if (row==1){
-                   res.send({success:true});
-               }
-
-               else{
-                   res.send({success:true});
-               }
-
-
-           })
-
-
-
-        })
-
-
-    });
-
-
-});
-
 
 
 function objc(imgUrl,name,date,time,desc){

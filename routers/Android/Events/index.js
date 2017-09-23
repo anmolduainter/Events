@@ -6,6 +6,7 @@
 const router=require('express').Router();
 
 router.use('/AllEvents',require('./AllEvents'));
+router.use('/RegisteredEvents',require('./RegisteredEvents'));
 router.use('/TodayEvents',require('./TodayEvents.js'))
 
 module.exports=router;

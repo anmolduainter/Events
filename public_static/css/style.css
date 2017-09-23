@@ -38,7 +38,9 @@ h3{
     border-radius: 50px;
     border-style: solid;
     border-color: grey;
+    overflow: visible;
     border-width:5px;
+    max-width: 100%;
 
 }
 
@@ -116,6 +118,7 @@ h3{
     width: auto;
     height: auto;
     z-index: -100;
+
 }
 
 h2{
@@ -132,4 +135,15 @@ h2{
     to{
         transform: matrix(1,0,0,1,0,0);
     }
+}
+
+@keyframes division {
+
+    0%{
+        transform: matrix(1,0,0,1,0,0);
+    }
+    50% {
+        transform: matrix(2, 10, 10, 2, 0, 0);
+    }
+
 }
