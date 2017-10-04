@@ -7,8 +7,12 @@ const ObjectId=require('mongodb').ObjectId;
 
 let url = 'mongodb://localhost:27017/myproject';
 
-
 router.get('/',(req,res)=> {
+
+
+
+    console.log("-------------------------REGISTERED EVENTS --------------------------------")
+
 
     let ResultArr=[];
 
@@ -126,37 +130,38 @@ router.get('/',(req,res)=> {
                         }
                     }
 
+                    console.log("date Q : "+dateQ)
+
+                    console.log("Time Hr : " + timeHr);
+
+                    console.log("Start Time : "+StartTime);
+
+                    console.log("End Time : " + EndTime)
 
                     if (dateQ==result[0].date){
 
-
-
                         if (timeHr<StartTime){
-
+                            console.log("less")
                             timeArr.push(false);
-
                         }
                         else if (timeHr>StartTime && timeHr<EndTime){
-
                             timeArr.push(false)
-
                         }
                         else if (timeHr>=EndTime){
-
                             timeArr.push(true)
 
-
                         }
-
-
-
                     }
-
-
                     else if (dateQ>result[0].date){
+
+                        console.log("DateQ eneterd")
 
                         timeArr.push(true);
 
+                    }
+
+                    else if (dateQ<result[0].date){
+                        timeArr.push(false);
                     }
 
 

@@ -134,7 +134,10 @@ router.get('/',(req,res)=>{
 
                      */
 
-                    if (req.user!==undefined){
+                    console.log(fav);
+                    console.log(registerEv);
+
+                    if (req.user!=undefined){
                         console.log(fav);
                         res.send({Result:result,Arr:arr,LoggedIn:loggedIn,Fav:fav,Reg:registerEv})
                     }

@@ -1,6 +1,5 @@
-/**
- * Created by anmol on 25/7/17.
- */
+
+// To register the event
 
 const router=require('express').Router();
 const sqlDb=require('../../DataBase/sqlDatabase');
@@ -12,23 +11,34 @@ router.post('/',(req,res)=> {
 
     // console.log(req.user);
 
+    // connecting MongoClient
     MongoClient.connect(url, (err, db) => {
 
+        // if error occured then throw that error
         if (err) throw err;
 
+        // getting name from body
         let name = req.body.name.toString();
+
+        //getting date from body
         let date = req.body.date.toString();
+
+        //getting time from body
         let time = req.body.time.toString();
+
+
         let newValues;
 
+        // getting the result array
         db.collection('AllEvents').find({name: name, date: date, time: time}).toArray((err, result) => {
             if (err) throw err;
 
 
+            // checking if not authorized
             if (req.user==undefined){
 
                 console.log("not Authorized");
-               // res.send("not Authorized");
+                res.send({success:false,msg:"notAuthorized"});
 
             }
 
@@ -41,7 +51,7 @@ router.post('/',(req,res)=> {
 
                 sqlDb.registerEvents.find({where:query}).then(function (result) {
 
-                    console.log(result)
+                    console.log(result);
 
                     if(result==null){
 
@@ -56,7 +66,7 @@ router.post('/',(req,res)=> {
                     }
                     else{
 
-                       res.send({success:false});
+                       res.send({success:false,msg:"yup"});
 
                     }
 

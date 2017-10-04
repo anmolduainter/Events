@@ -1,11 +1,7 @@
-/**
- * Created by anmol on 14/8/17.
- */
+
 
 const router=require('express').Router();
-
 const cheerio=require('cheerio');
-
 const request=require('request');
 
 let URL="https://in.bookmyshow.com/events/";
@@ -31,7 +27,6 @@ router.get('/',(req,res)=>{
 
 
             let date=$(this).children().eq(0).children().eq(4).children().eq(0).children().eq(0).text().trim();
-
             let tag=$(this).children().eq(1).children().eq(2).children().eq(0).children().eq(2).text();
             let buyNow=$(this).children().eq(1).children().eq(2).children().eq(1).children().eq(0).attr('href');
 
