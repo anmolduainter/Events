@@ -12,7 +12,7 @@ router.post('/',(req,res)=>{
     MongoClient.connect(url,(err,db)=>{
         if (err) throw err;
         db.collection('AllEvents').deleteMany({},function (err,result) {
-            res.send("Deleted");
+            res.send({"Deleted":true});
         });
         db.close();
     })

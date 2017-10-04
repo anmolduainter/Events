@@ -1,6 +1,3 @@
-/**
- * Created by anmol on 22/7/17.
- */
 
 const router=require('express').Router();
 const sqldb=require('../../DataBase/sqlDatabase.js');
@@ -9,6 +6,9 @@ const MongoClient = require('mongodb').MongoClient;
 let url = 'mongodb://localhost:27017/myproject';
 
 router.get('/',(req,res)=>{
+
+    console.log("Events Called ---------------------------->>>>>>>>>>>>>")
+
     MongoClient.connect(url,(err,db)=>{
         if (err) throw err;
         let usrId=req.user[0].dataValues.id;

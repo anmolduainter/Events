@@ -7,6 +7,9 @@ let url = 'mongodb://localhost:27017/myproject';
 
 router.post('/',(req,res)=>{
 
+    console.log("AddEvent Called ---------------------- >>>>>>>>>>>>>>>>>>>")
+
+
     MongoClient.connect(url,(err,db)=>{
 
         if (err) throw err;
@@ -27,7 +30,7 @@ router.post('/',(req,res)=>{
 
         db.collection('AllEvents').insertOne(
 
-            { Sql:id, imgUrl:imgURL, name: title,
+            { Sql:id.toString(), imgUrl:imgURL, name: title,
                 date:date,time:time,desc:desc , going:0 , interested:0 , like:0 , notlike:0 }
 
         ).then(function(result) {
